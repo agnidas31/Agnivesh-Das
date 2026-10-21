@@ -35,8 +35,10 @@ def live_projects():
     for pr in site_content.PROJECTS:
         if pr.get("status") == "live":
             pr = dict(pr, url=project_url(pr["repo"]))
+            pr.setdefault("link_label", "Read the case study")
             out.append(pr)
-    return out
+    # Current employer first, then the rest in listed order.
+    return sorted(out, key=lambda x: 0 if x["company"] == "Walmart" else 1)
 
 
 def real_credentials():
@@ -100,6 +102,8 @@ def md_to_page(md_text: str, page: str, has_technical: bool) -> str:
 
 def build_projects(projects_root: Path) -> None:
     for pr in live_projects():
+        if not pr.get("story"):
+            continue  # demo repos ship their own index.html
         repo_dir = projects_root / pr["repo"].lower()
         if not repo_dir.exists():
             print(f"skip {pr['repo']}: no checkout at {repo_dir}")

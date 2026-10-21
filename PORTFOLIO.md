@@ -37,7 +37,8 @@ Bentonville, Arkansas. Targeting Director of Data Analytics level roles.
    sections; worked examples use clearly labelled illustrative numbers.
 3. **Confidentiality.** No internal table names, URLs, colleague names, store numbers, account counts,
    internal margin rates or model scores unless Agnivesh explicitly approves publishing them.
-   Walmart is his current employer: get explicit sign-off before publishing any Walmart material.
+   Walmart is his current employer: get explicit sign-off before publishing any Walmart material
+   (given for the seven Walmart demo repos on 2026-10-20).
 4. **Own voice.** Do not reuse Victor Chowdhury's wording, labels or results ("Creative Solutions",
    "Field-Tested Innovation", "not just tables", "without a request queue in between", his metrics).
    Similar structure is fine; copied phrasing is not.
@@ -78,7 +79,7 @@ Technical file (optional): step-by-step method with formulas and short illustrat
 | Global-Fleet-BP | Live (pushed; Pages to be switched on) |
 | Inventory-Over-Short-BP | Live (pushed; Pages to be switched on) |
 | Fuel-Margin-Waterfall-BP | Live (pushed; Pages to be switched on) |
-| Agent-Performance-Scorecard, Appeasement-Analysis, CRM-Analysis, AIsleOne, Call-Complexity, Call-Complexity-vs-SSR, Smart-Woofie (all -Walmart) | Contain copies of Victor Chowdhury's public demo repos (byte-identical, his name in footers). **Not featured on the site.** Walmart work samples need Agnivesh's own write-ups and demos, or Victor's permission with credit and links to his originals. |
+| AIsleOne, CRM-Analysis, Smart-Woofie, Appeasement-Analysis, Agent-Performance-Scorecard, Call-Complexity, Call-Complexity-vs-SSR (all -Walmart) | Live demos (synthetic data) shown in Selected work; each repo serves its own index.html. Agnivesh confirmed he built them (executed the work; his Director was Victor Chowdhury) and approved publishing without a credit line. Pages to be switched on. |
 | bp_projects (private) | Original working copies of the BP write-ups |
 
 ## Decisions log

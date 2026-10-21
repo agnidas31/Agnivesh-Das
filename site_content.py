@@ -89,13 +89,85 @@ PROJECTS = [
         "technical": None,
         "status": "live",
     },
-    # Walmart case studies: repos exist, content pending source material from Agnivesh.
-    # Set status to "live" (and fill the fields) once each write-up is approved for publishing.
-    {"repo": "AIsleOne-Walmart", "title": "AISLE1", "company": "Walmart", "status": "pending"},
-    {"repo": "Smart-Woofie-Walmart", "title": "Smart Woofie", "company": "Walmart", "status": "pending"},
-    {"repo": "Call-Complexity-Walmart", "title": "Call Complexity", "company": "Walmart", "status": "pending"},
-    {"repo": "Call-Complexity-vs-SSR-Walmart", "title": "Call Complexity vs. Self-Serve Rate",
-     "company": "Walmart", "status": "pending"},
+    # Walmart work samples: live, self-contained demos (synthetic data) in their own repos.
+    # They have no Markdown case study, so build.py links straight to each repo's own index.html.
+    {
+        "repo": "AIsleOne-Walmart",
+        "title": "AISLE One CRM Dashboards",
+        "company": "Walmart",
+        "metric": "6",
+        "metric_label": "dashboards in one suite",
+        "summary": "The AISLE One CRM reporting suite as portable demos: AHT savings and deep-dive, Fixit Ops, "
+                   "QSR and Spark dashboards, each a self-contained page with synthetic data.",
+        "tags": ["Product analytics", "Contact center", "Chart.js"],
+        "status": "live", "link_label": "Open the demos",
+    },
+    {
+        "repo": "CRM-Analysis-Walmart",
+        "title": "Agent Assist Impact",
+        "company": "Walmart",
+        "metric": "23%",
+        "metric_label": "lower average handle time",
+        "summary": "How agents using AI Agent Assist compare with those who don't on handle time, CSAT and "
+                   "NPS, by endpoint and over time.",
+        "tags": ["Conversational AI", "CRM", "Measurement"],
+        "status": "live", "link_label": "Open the demo",
+    },
+    {
+        "repo": "Smart-Woofie-Walmart",
+        "title": "Smart Woffie",
+        "company": "Walmart",
+        "metric": "4B+",
+        "metric_label": "rows of CES data covered",
+        "summary": "An AI strategic-insights agent that queries BigQuery, writes executive reports and keeps a "
+                   "validated knowledge base of metric definitions that grows with every analysis.",
+        "tags": ["Agentic AI", "BigQuery", "Knowledge base"],
+        "status": "live", "link_label": "Open the demo",
+    },
+    {
+        "repo": "Appeasement-Analysis-Walmart",
+        "title": "Appeasement & Promo Analysis",
+        "company": "Walmart",
+        "metric": "45% → 71%",
+        "metric_label": "appeasement utilization",
+        "summary": "Promo-code issuance and redemption by category, GMV lift, diminishing returns by promo "
+                   "size, and Walmart+ versus non-member behavior.",
+        "tags": ["Customer strategy", "Walmart+", "Experimentation"],
+        "status": "live", "link_label": "Open the demo",
+    },
+    {
+        "repo": "Agent-Performance-Scorecard-Walmart",
+        "title": "Agent Performance Scorecard",
+        "company": "Walmart",
+        "metric": "10",
+        "metric_label": "KPIs in one weighted score",
+        "summary": "Grades internal and outsourced contact-center agents month by month on quality, "
+                   "productivity and adherence, with every grade traceable to its benchmarks.",
+        "tags": ["Workforce management", "KPI design", "Coaching"],
+        "status": "live", "link_label": "Open the demo",
+    },
+    {
+        "repo": "Call-Complexity-Walmart",
+        "title": "Call Complexity Scorecard",
+        "company": "Walmart",
+        "metric": "6",
+        "metric_label": "factors, scored Low / Medium / High",
+        "summary": "Scores every contact on six weighted factors to show which calls are genuinely hard, "
+                   "with drill-downs to individual contacts and recommended actions.",
+        "tags": ["Contact center", "Scoring model", "Operations"],
+        "status": "live", "link_label": "Open the demo",
+    },
+    {
+        "repo": "Call-Complexity-vs-SSR-Walmart",
+        "title": "Self-Serve vs. Call Complexity",
+        "company": "Walmart",
+        "metric": "SSR",
+        "metric_label": "against call complexity",
+        "summary": "Where self-service is winning, and where the calls left for agents are getting harder, "
+                   "by workflow and over time.",
+        "tags": ["Self-serve AI", "Operations", "Trend analysis"],
+        "status": "live", "link_label": "Open the demo",
+    },
 ]
 
 # "Ways I work" lenses: tabbed section on the hub. Each item is a short, confirmed anecdote.

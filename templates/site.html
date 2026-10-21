@@ -284,8 +284,8 @@
     <div class="head-row">
       <div>
         <p class="kicker">Work samples</p>
-        <h2>Case studies</h2>
-        <p class="sub" style="margin-bottom:24px">Projects I've led and built. Worked examples use illustrative numbers; confidential details are left out.</p>
+        <h2>Selected work</h2>
+        <p class="sub" style="margin-bottom:24px">Live demos and case studies of work I've built. Demos run on synthetic data; worked examples use illustrative numbers.</p>
       </div>
       <div class="nav-btns">
         <button class="cbtn" data-scroll="-1" aria-label="Scroll left">←</button>
@@ -306,7 +306,7 @@
               <h3>{{ pr.title }}</h3>
               <p>{{ pr.summary }}</p>
               <div class="tags">{% for t in pr.tags %}<span class="tag">{{ t }}</span>{% endfor %}</div>
-              <div class="go">Read the case study →</div>
+              <div class="go">{{ pr.link_label }} →</div>
             </div>
           </a>
           {% endfor %}
