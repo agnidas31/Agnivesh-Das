@@ -78,7 +78,7 @@ Technical file (optional): step-by-step method with formulas and short illustrat
 | Global-Fleet-BP | Live (pushed; Pages to be switched on) |
 | Inventory-Over-Short-BP | Live (pushed; Pages to be switched on) |
 | Fuel-Margin-Waterfall-BP | Live (pushed; Pages to be switched on) |
-| AIsleOne-Walmart, Smart-Woofie-Walmart, Call-Complexity-Walmart, Call-Complexity-vs-SSR-Walmart | Empty; waiting on source material and publishing sign-off |
+| Agent-Performance-Scorecard, Appeasement-Analysis, CRM-Analysis, AIsleOne, Call-Complexity, Call-Complexity-vs-SSR, Smart-Woofie (all -Walmart) | Contain copies of Victor Chowdhury's public demo repos (byte-identical, his name in footers). **Not featured on the site.** Walmart work samples need Agnivesh's own write-ups and demos, or Victor's permission with credit and links to his originals. |
 | bp_projects (private) | Original working copies of the BP write-ups |
 
 ## Decisions log
@@ -89,7 +89,10 @@ Technical file (optional): step-by-step method with formulas and short illustrat
 - Public résumé PDF on the site has **no phone number**. Private résumé: `python3 build.py resume --phone "…" --out ~/…`.
 - Visitor chat agent ("ask my AI", fit check) is **deferred**: needs a small serverless backend + API key.
 - Résumé is allowed to run to 3 pages.
-- Visual style: teal accent `#0e5a63`, Lora headings, Inter/Carlito body, light theme.
+- Visual style (site, Oct 2026): layout modeled on Victor Chowdhury's site (navy hero, impact grid, about, tabbed
+  "how I work" lenses, work-sample carousel, capabilities, career timeline, contact band), written from scratch.
+  Navy `#172340` base with a **copper accent `#b4541a`** (Victor uses teal), Source Serif 4 headings, Inter body.
+  The résumé PDF still uses teal `#0e5a63` with Lora/Carlito; align it if Agnivesh asks.
 
 ## Open items
 

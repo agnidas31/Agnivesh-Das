@@ -97,3 +97,62 @@ PROJECTS = [
     {"repo": "Call-Complexity-vs-SSR-Walmart", "title": "Call Complexity vs. Self-Serve Rate",
      "company": "Walmart", "status": "pending"},
 ]
+
+# "Ways I work" lenses: tabbed section on the hub. Each item is a short, confirmed anecdote.
+LENSES = [
+    {
+        "id": "lead",
+        "title": "Leadership & Strategy",
+        "blurb": "Setting the analytics agenda, building teams, and turning results into decisions leaders act on.",
+        "items": [
+            ("Four pillars, one agenda",
+             "Leads a team of 8+ across Operations, Workforce Management, CRM and Self-Serve AI for Walmart "
+             "Customer Engagement Services."),
+            ("From pilot to realized savings",
+             "Championed Agent Assist voice and chat AI across CRM: $17M in savings and a 23% cut in average "
+             "handle time, measured all the way through."),
+            ("Insights that reached strategy",
+             "Appeasement work lifted utilization from 45% to 71%, and the findings helped shape Walmart+ "
+             "adoption strategy."),
+            ("Adoption is part of the job",
+             "At Nike, trained 30+ colleagues on new Tableau dashboards and lifted utilization 40%."),
+        ],
+    },
+    {
+        "id": "ai",
+        "title": "AI & Customer Analytics",
+        "blurb": "Applying AI and customer analytics to questions the business actually asks.",
+        "items": [
+            ("AISLE1",
+             "An agentic AI insights product on Claude and BigQuery; VPs and senior directors query certified "
+             "metrics in plain English instead of raising ad hoc requests."),
+            ("Measuring an AI voice assistant",
+             "Built the measurement framework for Sierra as self-serve rose from 25% to 62%, with CSAT "
+             "improving alongside."),
+            ("One view of the customer",
+             "Led BP's Single Customer Identifier, linking till, loyalty and card data; fuel-to-store "
+             "conversion rose 38%."),
+            ("What a customer is worth",
+             "Customer Lifetime Value on top of SCI: a 4× increase in average customer spend and $8M in "
+             "marketing savings."),
+        ],
+    },
+    {
+        "id": "data",
+        "title": "Data Foundations & Engineering",
+        "blurb": "The pipelines, models and governed metrics that everything else stands on.",
+        "items": [
+            ("Matching data that never shared a key",
+             "Designed SCI's deterministic and probabilistic matching: exact keys, then confidence-scored "
+             "candidates within time and value tolerances."),
+            ("Three regions, one KPI view",
+             "Unified fleet KPIs across ESA, ANZ and the US: report prep cut 85%, decisions 3× faster."),
+            ("Finding where stock goes missing",
+             "Ranked stores by audit loss across Thorntons and ampm: priority stores found 4× faster, "
+             "inventory recovery up 22%."),
+            ("Legacy BI, modernized",
+             "Moved Nike's supply chain planning reporting from Cognos to Tableau on Teradata, automating ETL "
+             "across billions of rows."),
+        ],
+    },
+]

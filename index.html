@@ -10,224 +10,281 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #17202b;
-    --muted: #556070;
-    --faint: #8a94a2;
-    --rule: #dde3ea;
+    --navy: #172340;
+    --navy-2: #22335a;
+    --ink: #1b2230;
+    --muted: #5a6679;
+    --faint: #8b95a6;
+    --rule: #e4e7ed;
     --bg: #ffffff;
-    --bg-soft: #f4f7f9;
-    --accent: #0e5a63;
-    --accent-ink: #0b474e;
-    --accent-soft: #e8f2f3;
-    --radius: 10px;
-    --max: 1120px;
+    --bg-soft: #f7f8fa;
+    --accent: #b4541a;        /* copper */
+    --accent-ink: #8f4214;
+    --accent-soft: #fbede3;
+    --accent-bright: #f0a36c; /* for use on navy */
+    --radius: 12px;
+    --max: 1140px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  html, body { overflow-x: hidden; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: 16px; line-height: 1.6;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.6;
   }
   a { color: var(--accent); }
-  b { font-weight: 600; color: var(--ink); }
-  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
-  .serif { font-family: "Lora", Georgia, serif; }
+  b { font-weight: 600; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+  .serif { font-family: "Source Serif 4", Georgia, serif; }
+
+  /* Scroll progress */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 30; }
 
   /* Nav */
-  .nav {
-    position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.94);
-    backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule);
-  }
-  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; gap: 16px; }
-  .brand { font-family: "Lora", Georgia, serif; font-weight: 700; font-size: 19px; color: var(--ink); text-decoration: none; }
-  .nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+  .nav { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; gap: 16px; }
+  .brand { font-family: "Source Serif 4", Georgia, serif; font-weight: 700; font-size: 20px; color: var(--navy); text-decoration: none; }
+  .nav ul { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; align-items: center; }
   .nav ul a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
-  .nav ul a:hover { color: var(--accent); }
+  .nav ul a:hover { color: var(--navy); }
+  .nav .pill { background: var(--navy); color: #fff !important; padding: 8px 14px; border-radius: 8px; }
+  .menu-btn { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
+  .menu-btn span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; }
+  .mobile-panel { display: none; border-top: 1px solid var(--rule); background: #fff; padding: 10px 22px 16px; }
+  .mobile-panel a { display: block; padding: 9px 0; color: var(--ink); text-decoration: none; font-weight: 500; }
+  .mobile-panel.open { display: block; }
 
   /* Hero */
-  .hero { padding: 72px 0 44px; }
-  .eyebrow { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: 1.2px; text-transform: uppercase; }
-  .hero h1 { font-family: "Lora", Georgia, serif; font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin: 10px 0 14px; }
-  .hero .line { font-size: clamp(18px, 2.2vw, 22px); color: var(--ink); max-width: 760px; margin: 0 0 18px; }
-  .hero .summary { color: var(--muted); max-width: 820px; margin: 0 0 26px; }
-  .hero .summary b { color: var(--ink); }
-  .cta { display: flex; flex-wrap: wrap; gap: 10px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 8px;
-    font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--accent);
+  .hero { position: relative; background: var(--navy); color: #fff; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(600px 320px at 85% 10%, rgba(240,163,108,.18), transparent 70%),
+      radial-gradient(500px 300px at 0% 100%, rgba(255,255,255,.06), transparent 70%);
   }
+  .hero .wrap { position: relative; padding-top: 84px; padding-bottom: 76px; }
+  .eyebrow { color: var(--accent-bright); font-weight: 600; font-size: 13px; letter-spacing: 1.4px; text-transform: uppercase; }
+  .hero h1 { font-family: "Source Serif 4", Georgia, serif; font-size: clamp(42px, 7vw, 72px); line-height: 1.02; margin: 12px 0 18px; font-weight: 700; }
+  .hero .line { font-size: clamp(19px, 2.4vw, 24px); max-width: 780px; margin: 0 0 30px; color: #e8ecf4; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 9px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid transparent; }
   .btn.primary { background: var(--accent); color: #fff; }
   .btn.primary:hover { background: var(--accent-ink); }
-  .btn.ghost { color: var(--accent); background: #fff; }
-  .btn.ghost:hover { background: var(--accent-soft); }
-  .meta-row { margin-top: 18px; color: var(--faint); font-size: 14px; }
+  .btn.light { background: transparent; color: #fff; border-color: rgba(255,255,255,.35); }
+  .btn.light:hover { background: rgba(255,255,255,.08); }
+  .btn.outline { color: var(--navy); border-color: var(--navy); background: #fff; }
+  .btn.outline:hover { background: var(--bg-soft); }
+  .hero .facts { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 44px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.14); }
+  .hero .facts div { font-size: 14px; color: #b9c3d6; }
+  .hero .facts b { display: block; font-family: "Source Serif 4", Georgia, serif; font-size: 26px; color: #fff; font-weight: 700; }
 
   /* Sections */
-  section { padding: 56px 0; }
-  section.alt { background: var(--bg-soft); }
-  h2 { font-family: "Lora", Georgia, serif; font-size: clamp(26px, 3.4vw, 34px); margin: 0 0 6px; }
-  .sub { color: var(--muted); margin: 0 0 28px; max-width: 760px; }
+  section { padding: 80px 0; }
+  section.soft { background: var(--bg-soft); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .kicker { color: var(--accent); font-weight: 700; font-size: 12.5px; letter-spacing: 1.4px; text-transform: uppercase; margin: 0 0 8px; }
+  h2 { font-family: "Source Serif 4", Georgia, serif; font-size: clamp(28px, 3.8vw, 40px); line-height: 1.15; margin: 0 0 10px; color: var(--navy); }
+  .sub { color: var(--muted); margin: 0 0 34px; max-width: 760px; font-size: 17px; }
+  .head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
 
-  /* Impact grid */
-  .impact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .card {
-    background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--accent);
-    border-radius: var(--radius); padding: 16px 16px 18px;
-  }
-  .card .m { font-family: "Lora", Georgia, serif; font-size: 30px; font-weight: 700; color: var(--accent); line-height: 1.1; }
-  .card .l { font-weight: 700; margin-top: 6px; }
-  .card .t { font-size: 11.5px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--faint); margin-top: 2px; }
-  .card .d { font-size: 14.5px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+  /* Impact */
+  .impact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .icard { background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); padding: 20px; transition: box-shadow .2s, transform .2s; }
+  .icard:hover { box-shadow: 0 10px 28px rgba(23,35,64,.08); transform: translateY(-2px); }
+  .icard .m { font-family: "Source Serif 4", Georgia, serif; font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1.05; }
+  .icard .l { font-weight: 700; margin-top: 8px; color: var(--ink); }
+  .icard .t { font-size: 11.5px; letter-spacing: .8px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-top: 3px; }
+  .icard .d { font-size: 14.5px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
 
-  /* Work samples */
-  .work { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .proj {
-    display: flex; flex-direction: column; background: #fff; border: 1px solid var(--rule);
-    border-radius: var(--radius); padding: 20px; text-decoration: none; color: inherit;
-    transition: border-color .15s, transform .15s, box-shadow .15s;
+  /* About */
+  .about { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
+  .about p:not(.kicker) { color: #374152; font-size: 17px; margin: 0 0 14px; }
+  .about p b { color: var(--ink); }
+
+  /* Lenses (tabs) */
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .tab { border: 1px solid var(--rule); background: #fff; color: var(--muted); padding: 10px 18px; border-radius: 99px; font: 600 14px "Inter", sans-serif; cursor: pointer; }
+  .tab[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .panel .blurb { color: var(--muted); margin: 0 0 18px; }
+  .lgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .lcard { background: #fff; border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 10px; padding: 18px 20px; }
+  .lcard h3 { margin: 0 0 6px; font-size: 17px; color: var(--navy); }
+  .lcard p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Carousel */
+  .carousel { position: relative; }
+  .viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -22px; padding: 4px 22px 14px; }
+  .viewport::-webkit-scrollbar { display: none; }
+  .track { display: flex; gap: 18px; }
+  .nav-btns { display: flex; gap: 8px; }
+  .cbtn { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--rule); background: #fff; color: var(--navy); font-size: 18px; cursor: pointer; }
+  .cbtn:hover { border-color: var(--navy); }
+  .sample {
+    flex: 0 0 340px; scroll-snap-align: start; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius);
+    overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s;
   }
-  .proj:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(14,90,99,.10); }
-  .proj .co { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); }
-  .proj h3 { font-family: "Lora", Georgia, serif; font-size: 22px; margin: 6px 0 8px; line-height: 1.2; }
-  .proj .pm { font-family: "Lora", Georgia, serif; font-size: 26px; font-weight: 700; color: var(--ink); }
-  .proj .pml { color: var(--faint); font-size: 13px; margin-left: 6px; }
-  .proj p { color: var(--muted); font-size: 15px; margin: 10px 0 14px; flex: 1; }
+  .sample:hover { box-shadow: 0 12px 30px rgba(23,35,64,.10); transform: translateY(-3px); }
+  .thumb { background: var(--navy); color: #fff; padding: 22px 22px 20px; position: relative; overflow: hidden; min-height: 150px; }
+  .thumb::after { content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(240,163,108,.16); }
+  .thumb .co { font-size: 11.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent-bright); font-weight: 700; }
+  .thumb .big { font-family: "Source Serif 4", Georgia, serif; font-size: 40px; font-weight: 700; margin-top: 14px; line-height: 1; }
+  .thumb .bl { color: #c6cfdf; font-size: 13.5px; margin-top: 6px; }
+  .sbody { padding: 18px 22px 20px; display: flex; flex-direction: column; flex: 1; }
+  .sbody h3 { font-family: "Source Serif 4", Georgia, serif; font-size: 22px; margin: 0 0 8px; color: var(--navy); }
+  .sbody p { color: var(--muted); font-size: 15px; margin: 0 0 14px; flex: 1; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .tag { font-size: 12px; background: var(--accent-soft); color: var(--accent-ink); padding: 3px 9px; border-radius: 99px; }
-  .proj .go { margin-top: 14px; font-weight: 600; font-size: 14px; color: var(--accent); }
+  .go { margin-top: 14px; font-weight: 600; font-size: 14px; color: var(--accent); }
 
   /* Capabilities */
   .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .capcol { display: flex; flex-direction: column; gap: 8px; }
-  .cap { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; font-size: 15px; }
-  .cap.lead { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .cap { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 11px 15px; font-size: 15px; }
+  .cap.lead { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 600; }
 
-  /* Experience */
-  .job { display: grid; grid-template-columns: 220px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid var(--rule); }
-  .job:first-of-type { border-top: 0; }
-  .job .who { font-weight: 700; font-size: 18px; }
-  .job .when { color: var(--faint); font-size: 14px; }
-  .role + .role { margin-top: 22px; }
-  .role h3 { font-size: 17px; margin: 0; }
-  .role .ctx { color: var(--faint); font-size: 14px; margin: 2px 0 10px; font-style: italic; }
-  .role ul { margin: 0; padding-left: 18px; }
-  .role li { margin-bottom: 8px; color: var(--muted); }
-  .role li b { color: var(--ink); }
+  /* Timeline */
+  .timeline { position: relative; margin-left: 8px; }
+  .timeline::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px; background: var(--rule); }
+  .tl { position: relative; padding: 0 0 30px 32px; }
+  .tl::before { content: ""; position: absolute; left: -6px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 3px solid var(--accent); }
+  .tl .when { font-size: 13px; color: var(--faint); font-weight: 600; letter-spacing: .4px; }
+  .tl h3 { margin: 2px 0 0; font-size: 18px; color: var(--navy); }
+  .tl .org { color: var(--accent); font-weight: 600; font-size: 14.5px; }
+  .tl ul { margin: 10px 0 0; padding-left: 18px; }
+  .tl li { color: var(--muted); margin-bottom: 7px; font-size: 15.5px; }
+  .tl li b { color: var(--ink); }
 
   /* Education */
-  .edu p { margin: 0 0 6px; }
-  .edu span { color: var(--faint); }
+  .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .ecard { background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; }
+  .ecard b { display: block; color: var(--navy); }
+  .ecard span { color: var(--muted); font-size: 15px; }
 
   /* Contact */
-  .contact { text-align: center; }
+  .contact { background: var(--navy); color: #fff; text-align: center; }
+  .contact h2 { color: #fff; }
+  .contact .sub { color: #c6cfdf; margin-left: auto; margin-right: auto; }
   .contact .cta { justify-content: center; }
-
-  footer { border-top: 1px solid var(--rule); padding: 26px 0 36px; color: var(--faint); font-size: 13px; }
+  footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.1); color: #8f9bb3; font-size: 13px; padding: 22px 0 30px; }
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
-  @media (max-width: 960px) {
+  @media (max-width: 980px) {
     .impact { grid-template-columns: repeat(2, 1fr); }
-    .work { grid-template-columns: repeat(2, 1fr); }
+    .about { grid-template-columns: 1fr; gap: 10px; }
   }
-  @media (max-width: 720px) {
+  @media (max-width: 760px) {
     .nav ul { display: none; }
-    .hero { padding: 48px 0 32px; }
-    .impact, .work, .caps { grid-template-columns: 1fr; }
-    .job { grid-template-columns: 1fr; gap: 8px; }
-    section { padding: 44px 0; }
+    .menu-btn { display: block; }
+    .hero .wrap { padding-top: 56px; padding-bottom: 54px; }
+    section { padding: 58px 0; }
+    .impact, .lgrid, .caps, .edu { grid-template-columns: 1fr; }
+    .sample { flex-basis: 84%; }
+    .nav-btns { display: none; }
   }
 </style>
 </head>
 <body>
+<div id="progress"></div>
 
 <nav class="nav">
   <div class="wrap">
     <a class="brand" href="#top">Agnivesh Das</a>
     <ul>
       <li><a href="#impact">Impact</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#lenses">How I work</a></li>
+      <li><a href="#samples">Work samples</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a class="pill" href="#contact">Contact</a></li>
     </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#impact">Impact</a><a href="#about">About</a><a href="#lenses">How I work</a>
+    <a href="#samples">Work samples</a><a href="#career">Career</a><a href="#contact">Contact</a>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="eyebrow">Data Analytics &amp; AI Leader · Walmart · BP · Nike</div>
+    <div class="eyebrow">Data Analytics &amp; AI Leader</div>
     <h1>Agnivesh Das</h1>
     <p class="line">I turn fragmented enterprise data into decisions leaders trust, and build the AI that puts those answers in their hands.</p>
-    <p class="summary"><b>Data Analytics & AI Leader</b> with <b>13+ years</b> across <b>Walmart, BP and Nike</b>, currently leading a <b>team of 8+ across Operations, Workforce Management, CRM and Self-Serve AI</b> for Walmart Customer Engagement Services. Builds the foundations that make enterprise data trustworthy (governed metric repositories, measurement frameworks, data pipelines) and the AI agents that put answers in leaders' hands the moment they need them. Expertise spans conversational AI, customer analytics and lifetime value, fuel and fleet operations, and data engineering, consistently turning analytics from a rear-view mirror into a steering wheel. Just as comfortable shaping the data strategy as building the first working version of it.</p>
     <div class="cta">
-      <a class="btn primary" href="Agnivesh_Das_Resume.pdf" download>Download résumé</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn ghost" href="mailto:agnivesh.das@gmail.com">Email me</a>
+      <a class="btn primary" href="#samples">See my work</a>
+      <a class="btn light" href="Agnivesh_Das_Resume.pdf" download>Download résumé</a>
+      <a class="btn light" href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <div class="meta-row">Bentonville, Arkansas</div>
+    <div class="facts">
+      <div><b>13+ years</b>in data, analytics & AI</div>
+      <div><b>Walmart · BP · Nike</b>enterprise scale</div>
+      <div><b>8+ team</b>across four pillars</div>
+      <div><b>Bentonville, Arkansas</b>based</div>
+    </div>
   </div>
 </header>
 
-<section class="alt" id="impact">
+<section id="impact">
   <div class="wrap">
+    <p class="kicker">Signature work</p>
     <h2>Impact by the numbers</h2>
-    <p class="sub">A few results from the work, each tied to the project behind it.</p>
+    <p class="sub">Results from the work, each tied to the project behind it.</p>
     <div class="impact">
       
-      <div class="card">
+      <div class="icard">
         <div class="m">$17M</div>
         <div class="l">CRM AI Savings</div>
         <div class="t">Walmart · CRM</div>
         <div class="d">Championed Agent Assist voice and chat AI across CRM, cutting average handle time 23% on the way to realized savings.</div>
       </div>
       
-      <div class="card">
+      <div class="icard">
         <div class="m">25% → 62%</div>
         <div class="l">Self-Serve Rate</div>
         <div class="t">Walmart · Sierra Voice AI</div>
         <div class="d">Lifted self-service on the AI voice assistant, with CSAT climbing steadily alongside it.</div>
       </div>
       
-      <div class="card">
+      <div class="icard">
         <div class="m">45% → 71%</div>
         <div class="l">Appeasement Strategy</div>
         <div class="t">Walmart · Customer Engagement</div>
         <div class="d">Sharpened how appeasements are matched to customers; the findings fed directly into Walmart+ adoption strategy.</div>
       </div>
       
-      <div class="card">
+      <div class="icard">
         <div class="m">AISLE1</div>
         <div class="l">AI Insights Product</div>
         <div class="t">Agentic AI · Claude + BigQuery</div>
         <div class="d">VPs and senior directors now pull core metrics themselves in plain English, no ad hoc request needed.</div>
       </div>
       
-      <div class="card">
+      <div class="icard">
         <div class="m">38%</div>
         <div class="l">Fuel-to-Store Conversion</div>
         <div class="t">BP · Single Customer Identifier</div>
         <div class="d">Fuel and store data unified into one customer view, powering cross-shopping promotions.</div>
       </div>
       
-      <div class="card">
+      <div class="icard">
         <div class="m">4×</div>
         <div class="l">Average Customer Spend</div>
         <div class="t">BP · Customer Lifetime Value</div>
         <div class="d">Customer-value insights steered marketing to the right customers, saving $8M and lifting retention.</div>
       </div>
       
-      <div class="card">
+      <div class="icard">
         <div class="m">3 → 1</div>
         <div class="l">One Global Fleet View</div>
         <div class="t">BP · Global Fleet</div>
         <div class="d">ESA, ANZ and the US on a single trusted KPI view; report prep cut 85%, decisions 3× faster.</div>
       </div>
       
-      <div class="card">
+      <div class="icard">
         <div class="m">22%</div>
         <div class="l">Better Inventory Recovery</div>
         <div class="t">BP · Inventory Over &amp; Short</div>
@@ -238,192 +295,263 @@
   </div>
 </section>
 
-<section id="work">
-  <div class="wrap">
-    <h2>Work samples</h2>
-    <p class="sub">Case studies of projects I've led and built. Numbers in worked examples are illustrative; confidential details are left out.</p>
-    <div class="work">
-      
-      <a class="proj" href="https://agnidas31.github.io/Single-Customer-Identifier-BP/">
-        <div class="co">BP</div>
-        <h3>Single Customer Identifier</h3>
-        <div><span class="pm">38%</span><span class="pml">fuel-to-store conversion</span></div>
-        <p>Linking till, loyalty and card-payment records into one view of each customer, with confidence-scored matching built for data that never shared a key.</p>
-        <div class="tags"><span class="tag">Customer 360</span><span class="tag">Identity resolution</span><span class="tag">SQL</span></div>
-        <div class="go">Read the case study →</div>
-      </a>
-      
-      <a class="proj" href="https://agnidas31.github.io/Customer-Lifetime-Value-BP/">
-        <div class="co">BP</div>
-        <h3>Customer Lifetime Value</h3>
-        <div><span class="pm">4×</span><span class="pml">average customer spend</span></div>
-        <p>Turning a unified customer view into a forward-looking value for every customer, using survival models and discounted future margin.</p>
-        <div class="tags"><span class="tag">Survival analysis</span><span class="tag">Customer value</span><span class="tag">Marketing</span></div>
-        <div class="go">Read the case study →</div>
-      </a>
-      
-      <a class="proj" href="https://agnidas31.github.io/Global-Fleet-BP/">
-        <div class="co">BP</div>
-        <h3>Global Fleet KPI Report</h3>
-        <div><span class="pm">3 → 1</span><span class="pml">regions on one view</span></div>
-        <p>Three regions measuring the same fleet business three different ways, brought into one trusted, comparable report.</p>
-        <div class="tags"><span class="tag">KPI design</span><span class="tag">Data governance</span><span class="tag">Power BI</span></div>
-        <div class="go">Read the case study →</div>
-      </a>
-      
-      <a class="proj" href="https://agnidas31.github.io/Inventory-Over-Short-BP/">
-        <div class="co">BP</div>
-        <h3>Inventory Over &amp; Short</h3>
-        <div><span class="pm">22%</span><span class="pml">better inventory recovery</span></div>
-        <p>Store audits turned into a ranked view of where stock is being lost, how fast, and which stores need attention first.</p>
-        <div class="tags"><span class="tag">Shrink</span><span class="tag">Loss prevention</span><span class="tag">Power BI</span></div>
-        <div class="go">Read the case study →</div>
-      </a>
-      
-      <a class="proj" href="https://agnidas31.github.io/Fuel-Margin-Waterfall-BP/">
-        <div class="co">BP</div>
-        <h3>Fuel Margin Waterfall</h3>
-        <div><span class="pm">2×</span><span class="pml">faster root-cause analysis</span></div>
-        <p>One cents-per-gallon margin number broken into the drivers behind it, so pricing and supply teams can see why margin moved.</p>
-        <div class="tags"><span class="tag">Pricing analytics</span><span class="tag">Fuel retail</span><span class="tag">Tableau</span></div>
-        <div class="go">Read the case study →</div>
-      </a>
-      
+<section class="soft" id="about">
+  <div class="wrap about">
+    <div>
+      <p class="kicker">About</p>
+      <h2>From rear-view reporting to steering the business</h2>
+    </div>
+    <div>
+      <p><b>Data Analytics & AI Leader</b> with <b>13+ years</b> across <b>Walmart, BP and Nike</b>, currently leading a <b>team of 8+ across Operations, Workforce Management, CRM and Self-Serve AI</b> for Walmart Customer Engagement Services. Builds the foundations that make enterprise data trustworthy (governed metric repositories, measurement frameworks, data pipelines) and the AI agents that put answers in leaders' hands the moment they need them. Expertise spans conversational AI, customer analytics and lifetime value, fuel and fleet operations, and data engineering, consistently turning analytics from a rear-view mirror into a steering wheel. Just as comfortable shaping the data strategy as building the first working version of it.</p>
     </div>
   </div>
 </section>
 
-<section class="alt" id="capabilities">
+<section id="lenses">
   <div class="wrap">
+    <p class="kicker">How I work</p>
+    <h2>Three lenses on the same job</h2>
+    <p class="sub">Leading the work, applying AI and analytics to real problems, and building the foundations underneath.</p>
+    <div class="tabs" role="tablist">
+      
+      <button class="tab" role="tab" aria-selected="true" data-target="lens-lead">Leadership &amp; Strategy</button>
+      
+      <button class="tab" role="tab" aria-selected="false" data-target="lens-ai">AI &amp; Customer Analytics</button>
+      
+      <button class="tab" role="tab" aria-selected="false" data-target="lens-data">Data Foundations &amp; Engineering</button>
+      
+    </div>
+    
+    <div class="panel active" id="lens-lead" role="tabpanel">
+      <p class="blurb">Setting the analytics agenda, building teams, and turning results into decisions leaders act on.</p>
+      <div class="lgrid">
+        <div class="lcard"><h3>Four pillars, one agenda</h3><p>Leads a team of 8+ across Operations, Workforce Management, CRM and Self-Serve AI for Walmart Customer Engagement Services.</p></div><div class="lcard"><h3>From pilot to realized savings</h3><p>Championed Agent Assist voice and chat AI across CRM: $17M in savings and a 23% cut in average handle time, measured all the way through.</p></div><div class="lcard"><h3>Insights that reached strategy</h3><p>Appeasement work lifted utilization from 45% to 71%, and the findings helped shape Walmart+ adoption strategy.</p></div><div class="lcard"><h3>Adoption is part of the job</h3><p>At Nike, trained 30+ colleagues on new Tableau dashboards and lifted utilization 40%.</p></div>
+      </div>
+    </div>
+    
+    <div class="panel" id="lens-ai" role="tabpanel">
+      <p class="blurb">Applying AI and customer analytics to questions the business actually asks.</p>
+      <div class="lgrid">
+        <div class="lcard"><h3>AISLE1</h3><p>An agentic AI insights product on Claude and BigQuery; VPs and senior directors query certified metrics in plain English instead of raising ad hoc requests.</p></div><div class="lcard"><h3>Measuring an AI voice assistant</h3><p>Built the measurement framework for Sierra as self-serve rose from 25% to 62%, with CSAT improving alongside.</p></div><div class="lcard"><h3>One view of the customer</h3><p>Led BP&#39;s Single Customer Identifier, linking till, loyalty and card data; fuel-to-store conversion rose 38%.</p></div><div class="lcard"><h3>What a customer is worth</h3><p>Customer Lifetime Value on top of SCI: a 4× increase in average customer spend and $8M in marketing savings.</p></div>
+      </div>
+    </div>
+    
+    <div class="panel" id="lens-data" role="tabpanel">
+      <p class="blurb">The pipelines, models and governed metrics that everything else stands on.</p>
+      <div class="lgrid">
+        <div class="lcard"><h3>Matching data that never shared a key</h3><p>Designed SCI&#39;s deterministic and probabilistic matching: exact keys, then confidence-scored candidates within time and value tolerances.</p></div><div class="lcard"><h3>Three regions, one KPI view</h3><p>Unified fleet KPIs across ESA, ANZ and the US: report prep cut 85%, decisions 3× faster.</p></div><div class="lcard"><h3>Finding where stock goes missing</h3><p>Ranked stores by audit loss across Thorntons and ampm: priority stores found 4× faster, inventory recovery up 22%.</p></div><div class="lcard"><h3>Legacy BI, modernized</h3><p>Moved Nike&#39;s supply chain planning reporting from Cognos to Tableau on Teradata, automating ETL across billions of rows.</p></div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<section class="soft" id="samples">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <p class="kicker">Work samples</p>
+        <h2>Case studies</h2>
+        <p class="sub" style="margin-bottom:24px">Projects I've led and built. Worked examples use illustrative numbers; confidential details are left out.</p>
+      </div>
+      <div class="nav-btns">
+        <button class="cbtn" data-scroll="-1" aria-label="Scroll left">←</button>
+        <button class="cbtn" data-scroll="1" aria-label="Scroll right">→</button>
+      </div>
+    </div>
+    <div class="carousel">
+      <div class="viewport" id="samplesViewport">
+        <div class="track">
+          
+          <a class="sample" href="https://agnidas31.github.io/Single-Customer-Identifier-BP/">
+            <div class="thumb">
+              <div class="co">BP</div>
+              <div class="big">38%</div>
+              <div class="bl">fuel-to-store conversion</div>
+            </div>
+            <div class="sbody">
+              <h3>Single Customer Identifier</h3>
+              <p>Linking till, loyalty and card-payment records into one view of each customer, with confidence-scored matching built for data that never shared a key.</p>
+              <div class="tags"><span class="tag">Customer 360</span><span class="tag">Identity resolution</span><span class="tag">SQL</span></div>
+              <div class="go">Read the case study →</div>
+            </div>
+          </a>
+          
+          <a class="sample" href="https://agnidas31.github.io/Customer-Lifetime-Value-BP/">
+            <div class="thumb">
+              <div class="co">BP</div>
+              <div class="big">4×</div>
+              <div class="bl">average customer spend</div>
+            </div>
+            <div class="sbody">
+              <h3>Customer Lifetime Value</h3>
+              <p>Turning a unified customer view into a forward-looking value for every customer, using survival models and discounted future margin.</p>
+              <div class="tags"><span class="tag">Survival analysis</span><span class="tag">Customer value</span><span class="tag">Marketing</span></div>
+              <div class="go">Read the case study →</div>
+            </div>
+          </a>
+          
+          <a class="sample" href="https://agnidas31.github.io/Global-Fleet-BP/">
+            <div class="thumb">
+              <div class="co">BP</div>
+              <div class="big">3 → 1</div>
+              <div class="bl">regions on one view</div>
+            </div>
+            <div class="sbody">
+              <h3>Global Fleet KPI Report</h3>
+              <p>Three regions measuring the same fleet business three different ways, brought into one trusted, comparable report.</p>
+              <div class="tags"><span class="tag">KPI design</span><span class="tag">Data governance</span><span class="tag">Power BI</span></div>
+              <div class="go">Read the case study →</div>
+            </div>
+          </a>
+          
+          <a class="sample" href="https://agnidas31.github.io/Inventory-Over-Short-BP/">
+            <div class="thumb">
+              <div class="co">BP</div>
+              <div class="big">22%</div>
+              <div class="bl">better inventory recovery</div>
+            </div>
+            <div class="sbody">
+              <h3>Inventory Over &amp; Short</h3>
+              <p>Store audits turned into a ranked view of where stock is being lost, how fast, and which stores need attention first.</p>
+              <div class="tags"><span class="tag">Shrink</span><span class="tag">Loss prevention</span><span class="tag">Power BI</span></div>
+              <div class="go">Read the case study →</div>
+            </div>
+          </a>
+          
+          <a class="sample" href="https://agnidas31.github.io/Fuel-Margin-Waterfall-BP/">
+            <div class="thumb">
+              <div class="co">BP</div>
+              <div class="big">2×</div>
+              <div class="bl">faster root-cause analysis</div>
+            </div>
+            <div class="sbody">
+              <h3>Fuel Margin Waterfall</h3>
+              <p>One cents-per-gallon margin number broken into the drivers behind it, so pricing and supply teams can see why margin moved.</p>
+              <div class="tags"><span class="tag">Pricing analytics</span><span class="tag">Fuel retail</span><span class="tag">Tableau</span></div>
+              <div class="go">Read the case study →</div>
+            </div>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="wrap">
+    <p class="kicker">Capabilities</p>
     <h2>Leadership &amp; technical capabilities</h2>
-    <p class="sub">Leading the work, applying AI and analytics to real business problems, and building the foundations underneath.</p>
+    <p class="sub">The skills behind the results.</p>
     <div class="caps">
       
-      <div class="capcol">
-        <div class="cap lead">AI &amp; Analytics Strategy</div><div class="cap">Team Leadership &amp; Delivery</div><div class="cap">Executive Data Storytelling</div><div class="cap">Stakeholder Management</div><div class="cap">Self-Service Analytics Enablement</div>
-      </div>
+      <div class="capcol"><div class="cap lead">AI &amp; Analytics Strategy</div><div class="cap">Team Leadership &amp; Delivery</div><div class="cap">Executive Data Storytelling</div><div class="cap">Stakeholder Management</div><div class="cap">Self-Service Analytics Enablement</div></div>
       
-      <div class="capcol">
-        <div class="cap lead">Agentic AI &amp; GenAI Applications</div><div class="cap">Conversational AI Analytics</div><div class="cap">Customer Data Unification</div><div class="cap">Customer Lifetime Value Modeling</div><div class="cap">Fuel, Fleet &amp; Shrink Analytics</div>
-      </div>
+      <div class="capcol"><div class="cap lead">Agentic AI &amp; GenAI Applications</div><div class="cap">Conversational AI Analytics</div><div class="cap">Customer Data Unification</div><div class="cap">Customer Lifetime Value Modeling</div><div class="cap">Fuel, Fleet &amp; Shrink Analytics</div></div>
       
-      <div class="capcol">
-        <div class="cap lead">Governed Metrics &amp; Semantic Layers</div><div class="cap">Measurement Frameworks &amp; KPIs</div><div class="cap">Data Pipelines &amp; ETL at Scale</div><div class="cap">Data Modeling &amp; Governance</div><div class="cap">BI &amp; Dashboard Development</div>
-      </div>
+      <div class="capcol"><div class="cap lead">Governed Metrics &amp; Semantic Layers</div><div class="cap">Measurement Frameworks &amp; KPIs</div><div class="cap">Data Pipelines &amp; ETL at Scale</div><div class="cap">Data Modeling &amp; Governance</div><div class="cap">BI &amp; Dashboard Development</div></div>
       
     </div>
   </div>
 </section>
 
-<section id="experience">
+<section class="soft" id="career">
   <div class="wrap">
-    <h2>Experience</h2>
+    <p class="kicker">Career</p>
+    <h2>Career timeline</h2>
     <p class="sub">13+ years across retail, energy, apparel and healthcare.</p>
-    
-    <div class="job">
-      <div>
-        <div class="who">Walmart</div>
+    <div class="timeline">
+      
+      <div class="tl">
         <div class="when">Sep 2025 — Present</div>
+        <h3>Manager, Strategic Insights &amp; AI — Customer Engagement Services</h3>
+        <div class="org">Walmart · Bentonville, Arkansas</div>
+        <ul><li><b>Championed AI initiatives across CRM that delivered $17M in savings and cut average handle time 23%</b>: bringing Agent Assist voice and chat agents from pilot through adoption, with pilot design, adoption tracking, scale-or-stop calls, and measurement through to realized savings.</li><li><b>Built AISLE1, an agentic AI insights product that lets VPs and senior directors query core metrics in plain English</b>: a Claude-powered analytics suite on a BigQuery backend that serves as the organization's governed metric repository. A semantic layer keeps every definition certified and consistent, so leaders get narrative answers on demand instead of raising ad hoc requests.</li></ul>
       </div>
-      <div>
-        
-        <div class="role">
-          <h3>Manager, Strategic Insights &amp; AI — Customer Engagement Services</h3>
-          <div class="ctx">Sep 2025 — Present · Bentonville, Arkansas</div>
-          <ul><li><b>Championed AI initiatives across CRM that delivered $17M in savings and cut average handle time 23%</b>: bringing Agent Assist voice and chat agents from pilot through adoption, with pilot design, adoption tracking, scale-or-stop calls, and measurement through to realized savings.</li><li><b>Built AISLE1, an agentic AI insights product that lets VPs and senior directors query core metrics in plain English</b>: a Claude-powered analytics suite on a BigQuery backend that serves as the organization's governed metric repository. A semantic layer keeps every definition certified and consistent, so leaders get narrative answers on demand instead of raising ad hoc requests.</li><li><b>Drove appeasement utilization from 45% to 71%</b> by sharpening how service appeasements are matched to customers. The insights went on to help shape Walmart+ adoption strategy.</li></ul>
-        </div>
-        
+      
+      <div class="tl">
+        <div class="when">Feb 2021 — Aug 2025</div>
+        <h3>Senior Data Analyst — Dataworx AI Team</h3>
+        <div class="org">British Petroleum (BP) · Chicago, Illinois</div>
+        <ul><li><b>Led development of the Single Customer Identifier (SCI), BP's Customer 360 foundation, lifting fuel-to-store conversion 38%</b>: unified till (EPOS), loyalty and card-payment data across fuel and convenience into a single customer profile across the UK, Germany and Poland.</li><li><b>Designed the deterministic and probabilistic matching logic behind SCI</b>: cleansed each source, matched exactly on site, date and basket type, then confidence-scored candidates within time and value tolerances.</li></ul>
       </div>
-    </div>
-    
-    <div class="job">
-      <div>
-        <div class="who">British Petroleum (BP)</div>
-        <div class="when">Feb 2017 — Aug 2025</div>
+      
+      <div class="tl">
+        <div class="when">Feb 2017 — Jan 2021</div>
+        <h3>Data Analyst — NA Fuel Analytics Team</h3>
+        <div class="org">British Petroleum (BP) · Chicago, Illinois</div>
+        <ul><li><b>Unified BP's global fleet card KPIs across ESA, ANZ and the US into one trusted report, cutting report preparation 85% and enabling 3× faster decisions by fleet managers</b>: standardized three regional systems into a common data model while keeping each region's definitions explicit (litres vs. gallons, cents per litre vs. cents per gallon, region-specific contribution margin).</li><li><b>Turned store inventory audits into a ranked shrink-prevention tool across Thorntons and ampm, identifying priority stores 4× faster and improving inventory recovery 22%</b>: consolidated audit adjustments by store, department and category (tobacco, beer, beverages, fresh food) and normalized losses to a per-day rate so stores on different audit cycles compared fairly.</li></ul>
       </div>
-      <div>
-        
-        <div class="role">
-          <h3>Senior Data Analyst — Dataworx AI Team</h3>
-          <div class="ctx">Feb 2021 — Aug 2025 · Chicago, Illinois</div>
-          <ul><li><b>Led development of the Single Customer Identifier (SCI), BP's Customer 360 foundation, lifting fuel-to-store conversion 38%</b>: unified till (EPOS), loyalty and card-payment data across fuel and convenience into a single customer profile across the UK, Germany and Poland.</li><li><b>Designed the deterministic and probabilistic matching logic behind SCI</b>: cleansed each source, matched exactly on site, date and basket type, then confidence-scored candidates within time and value tolerances.</li><li><b>Delivered $8M in marketing savings and a 4× increase in average customer spend through Customer Lifetime Value (CLV)</b>: built on the unified SCI view, value and retention insights pinpointed the highest-value customer segments and steered targeted marketing toward them, improving retention.</li></ul>
-        </div>
-        
-        <div class="role">
-          <h3>Data Analyst — NA Fuel Analytics Team</h3>
-          <div class="ctx">Feb 2017 — Jan 2021 · Chicago, Illinois</div>
-          <ul><li><b>Unified BP's global fleet card KPIs across ESA, ANZ and the US into one trusted report, cutting report preparation 85% and enabling 3× faster decisions by fleet managers</b>: standardized three regional systems into a common data model while keeping each region's definitions explicit (litres vs. gallons, cents per litre vs. cents per gallon, region-specific contribution margin).</li><li><b>Turned store inventory audits into a ranked shrink-prevention tool across Thorntons and ampm, identifying priority stores 4× faster and improving inventory recovery 22%</b>: consolidated audit adjustments by store, department and category (tobacco, beer, beverages, fresh food) and normalized losses to a per-day rate so stores on different audit cycles compared fairly.</li><li><b>Decomposed fuel margin against market and competitor prices into its drivers, cutting root-cause analysis time by 2× and improving supply decisions</b>: built a cents-per-gallon waterfall separating market (OPIS) margin, brand value, supply premium, contract terms and invoice-volume variance, rolling up to standard, integrated and environmental margin.</li></ul>
-        </div>
-        
-      </div>
-    </div>
-    
-    <div class="job">
-      <div>
-        <div class="who">Nike</div>
+      
+      <div class="tl">
         <div class="when">Feb 2015 — Jan 2017</div>
+        <h3>Business Intelligence Engineer</h3>
+        <div class="org">Nike · Beaverton, Oregon</div>
+        <ul><li><b>Owned the move of Nike's supply chain planning reporting from legacy Cognos to Tableau, speeding up decision-making 25%</b>: rebuilt aging static reports as interactive dashboards on SQL and Teradata, giving planning teams a faster read on supply against consumer demand for Nike Digital.</li><li><b>Built the data foundation underneath</b>: Teradata pipelines ingesting transactional and customer data from four primary sources, with ETL automated across billions of rows to cut manual workload <b>20% a month</b>.</li></ul>
       </div>
-      <div>
-        
-        <div class="role">
-          <h3>Business Intelligence Engineer</h3>
-          <div class="ctx">Feb 2015 — Jan 2017 · Beaverton, Oregon</div>
-          <ul><li><b>Owned the move of Nike's supply chain planning reporting from legacy Cognos to Tableau, speeding up decision-making 25%</b>: rebuilt aging static reports as interactive dashboards on SQL and Teradata, giving planning teams a faster read on supply against consumer demand for Nike Digital.</li><li><b>Built the data foundation underneath</b>: Teradata pipelines ingesting transactional and customer data from four primary sources, with ETL automated across billions of rows to cut manual workload <b>20% a month</b>.</li></ul>
-        </div>
-        
-      </div>
-    </div>
-    
-    <div class="job">
-      <div>
-        <div class="who">EmblemHealth</div>
+      
+      <div class="tl">
         <div class="when">Feb 2013 — Jan 2015</div>
+        <h3>Business Analyst</h3>
+        <div class="org">EmblemHealth · New York City, New York</div>
+        <ul><li><b>Bridged business, clinical coding and IT teams through EmblemHealth's ICD-9 to ICD-10 migration</b>, a federally mandated overhaul that expanded diagnosis codes roughly five-fold: assessed the impact on data models, claims workflows and reporting, and turned it into Business Requirements and Functional Specifications documents.</li></ul>
       </div>
-      <div>
-        
-        <div class="role">
-          <h3>Business Analyst</h3>
-          <div class="ctx">Feb 2013 — Jan 2015 · New York City, New York</div>
-          <ul><li><b>Bridged business, clinical coding and IT teams through EmblemHealth's ICD-9 to ICD-10 migration</b>, a federally mandated overhaul that expanded diagnosis codes roughly five-fold: assessed the impact on data models, claims workflows and reporting, and turned it into Business Requirements and Functional Specifications documents.</li></ul>
-        </div>
-        
-      </div>
+      
     </div>
-    
   </div>
 </section>
 
-<section class="alt">
-  <div class="wrap edu">
-    <h2>Education</h2>
-    <p class="sub" style="margin-bottom:14px"></p>
-    
-    <p><b>Master&#39;s Degree, Engineering Management</b> · George Washington University <span>· 2010 — 2012</span></p>
-    
-    <p><b>Bachelor&#39;s Degree, Electronics &amp; Instrumentation</b> · West Bengal University of Technology <span>· 2006 — 2010</span></p>
-    
-    
+<section id="education">
+  <div class="wrap">
+    <p class="kicker">Education</p>
+    <h2>Education &amp; credentials</h2>
+    <p class="sub"></p>
+    <div class="edu">
+      <div class="ecard"><b>Master&#39;s Degree, Engineering Management</b><span>George Washington University · Washington, D.C. · 2010 — 2012</span></div><div class="ecard"><b>Bachelor&#39;s Degree, Electronics &amp; Instrumentation</b><span>West Bengal University of Technology · Kolkata, India · 2006 — 2010</span></div>
+      
+    </div>
   </div>
 </section>
 
-<section id="contact" class="contact">
+<section class="contact" id="contact">
   <div class="wrap">
     <h2>Let's talk</h2>
-    <p class="sub" style="margin:0 auto 24px">Open to conversations about data, analytics and AI leadership roles.</p>
+    <p class="sub">Open to conversations about data, analytics and AI leadership roles.</p>
     <div class="cta">
       <a class="btn primary" href="mailto:agnivesh.das@gmail.com">agnivesh.das@gmail.com</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn ghost" href="Agnivesh_Das_Resume.pdf" download>Résumé (PDF)</a>
+      <a class="btn light" href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn light" href="Agnivesh_Das_Resume.pdf" download>Résumé (PDF)</a>
     </div>
   </div>
 </section>
-
 <footer>
-  <div class="wrap">
-    <span>© 2026 Agnivesh Das</span>
-    <span>Built from a single content file and published on GitHub Pages.</span>
-  </div>
+  <div class="wrap"><span>© 2026 Agnivesh Das</span><span>Built from a single content file · GitHub Pages</span></div>
 </footer>
 
+<script>
+  // Scroll progress bar
+  const bar = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+  // Mobile menu
+  const mb = document.getElementById('menuBtn'), mp = document.getElementById('mobilePanel');
+  mb.addEventListener('click', () => { const o = mp.classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
+  mp.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mp.classList.remove('open')));
+  // Lens tabs
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', 'false'));
+    document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
+    t.setAttribute('aria-selected', 'true');
+    document.getElementById(t.dataset.target).classList.add('active');
+  }));
+  // Carousel buttons
+  const vp = document.getElementById('samplesViewport');
+  document.querySelectorAll('[data-scroll]').forEach(b => b.addEventListener('click', () => {
+    vp.scrollBy({ left: Number(b.dataset.scroll) * 360, behavior: 'smooth' });
+  }));
+</script>
 </body>
 </html>

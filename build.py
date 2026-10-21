@@ -70,7 +70,8 @@ def build_site() -> None:
         p=content.PROFILE, site=site_content.SITE, summary=content.SUMMARY,
         signature=content.SIGNATURE, capabilities=content.CAPABILITIES,
         experience=content.EXPERIENCE, education=content.EDUCATION,
-        credentials=real_credentials(), projects=live_projects(), year=datetime.date.today().year,
+        credentials=real_credentials(), projects=live_projects(), lenses=site_content.LENSES,
+        year=datetime.date.today().year,
     )
     (ROOT / "index.html").write_text(html, encoding="utf-8")
     print("hub -> index.html")
