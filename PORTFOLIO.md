@@ -64,19 +64,20 @@ Technical file (optional): step-by-step method with formulas and short illustrat
 6. Add the project to `PROJECTS` in `site_content.py` with `status: "live"`.
 7. If it changes the résumé (new metric or bullet), update `content.py`.
 8. `python3 build.py all`, screenshot-check desktop and 390px mobile, grep for placeholders.
-9. Commit and push the project repo and this repo; enable Pages on new repos
-   (`gh api -X POST repos/agnidas31/<Repo>/pages -f "source[branch]=main" -f "source[path]=/"`).
+9. Commit and push the project repo and this repo. GitHub Pages must be switched on once per new repo
+   by Agnivesh (the session's GitHub proxy blocks the Pages API): repo → Settings → Pages →
+   "Deploy from a branch" → `main` / `/ (root)` → Save.
 
 ## Status
 
 | Repo | State |
 |---|---|
-| Agnivesh-Das (hub) | Live build; custom domain pending |
-| Single-Customer-Identifier-BP | Live (story + technical) |
-| Customer-Lifetime-Value-BP | Live (story + technical) |
-| Global-Fleet-BP | Live |
-| Inventory-Over-Short-BP | Live |
-| Fuel-Margin-Waterfall-BP | Live |
+| Agnivesh-Das (hub) | Built and pushed; Pages to be switched on; custom domain pending |
+| Single-Customer-Identifier-BP | Live (story + technical) (pushed; Pages to be switched on) |
+| Customer-Lifetime-Value-BP | Live (story + technical) (pushed; Pages to be switched on) |
+| Global-Fleet-BP | Live (pushed; Pages to be switched on) |
+| Inventory-Over-Short-BP | Live (pushed; Pages to be switched on) |
+| Fuel-Margin-Waterfall-BP | Live (pushed; Pages to be switched on) |
 | AIsleOne-Walmart, Smart-Woofie-Walmart, Call-Complexity-Walmart, Call-Complexity-vs-SSR-Walmart | Empty; waiting on source material and publishing sign-off |
 | bp_projects (private) | Original working copies of the BP write-ups |
 
