@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ p.name }} — Résumé</title>
+<style>
+  :root {
+    --ink: #1c2430;
+    --muted: #5b6573;
+    --faint: #8a93a0;
+    --rule: #d9dee5;
+    --accent: #0e5a63;
+    --accent-soft: #eaf3f4;
+  }
+  @page { size: Letter; margin: 0.45in 0.55in; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body {
+    font-family: "Carlito", "Calibri", "Liberation Sans", sans-serif;
+    color: var(--ink);
+    font-size: 9.8pt;
+    line-height: 1.3;
+  }
+  b { font-weight: 700; color: #111821; }
+
+  /* Header */
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 9px; margin-bottom: 10px; }
+  h1 {
+    font-family: "Lora", "Liberation Serif", serif;
+    font-size: 27pt; font-weight: 700; margin: 0; letter-spacing: -0.3px; line-height: 1.05;
+  }
+  .tagline {
+    margin-top: 4px; font-size: 8.6pt; letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
+  }
+  .contact { margin-top: 7px; font-size: 9.4pt; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  .portfolio { margin-top: 5px; font-size: 9.4pt; }
+  .portfolio span { color: var(--accent); font-weight: 700; }
+
+  .summary { margin: 0 0 4px; }
+
+  /* Section headings */
+  h2 {
+    font-size: 9pt; letter-spacing: 0.6px; text-transform: uppercase; color: var(--accent);
+    margin: 9px 0 5px; padding-bottom: 3px; border-bottom: 1px solid var(--rule); font-weight: 700;
+    break-after: avoid;
+  }
+  h2 .sub { color: var(--faint); letter-spacing: 0.6px; }
+
+  /* Signature work */
+  .sig { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px 7px; }
+  .card {
+    background: var(--accent-soft); border-radius: 5px; padding: 5px 8px 5px;
+    border-top: 3px solid var(--accent); break-inside: avoid;
+  }
+  .card .m {
+    font-family: "Lora", "Liberation Serif", serif; font-size: 16pt; font-weight: 700;
+    color: var(--accent); line-height: 1.1; white-space: nowrap;
+  }
+  .card .l { font-weight: 700; font-size: 9.4pt; margin-top: 2px; }
+  .card .t { font-size: 7pt; letter-spacing: 0.3px; text-transform: uppercase; color: var(--faint); margin-top: 1px; }
+  .card .d { font-size: 8.4pt; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+
+  /* Capabilities */
+  .caps { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(5, auto); grid-auto-flow: column; gap: 3px 6px; }
+  .cap {
+    font-size: 9pt; line-height: 1.2; padding: 3px 8px; border-radius: 3px;
+    border: 1px solid var(--rule); background: #f6f8fa; color: var(--ink);
+  }
+  .cap.lead {
+    background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700;
+    padding: 4px 8px;
+  }
+
+  /* Experience */
+  .role { margin-bottom: 8px; }
+  .role-head, .context { break-after: avoid; }
+  .lead, li { break-inside: avoid; }
+  .role-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .role-title { font-weight: 700; font-size: 10.8pt; }
+  .dates { font-size: 9.2pt; color: var(--muted); white-space: nowrap; font-weight: 700; }
+  .context { font-size: 9pt; color: var(--faint); font-style: italic; margin: 1px 0 4px; }
+  .lead { margin: 0 0 5px; padding-left: 9px; border-left: 2px solid var(--accent); }
+  ul { margin: 0; padding-left: 15px; }
+  li { margin-bottom: 2.5px; }
+  li::marker { color: var(--accent); }
+
+  /* Tech, education */
+  .tech p { margin: 0 0 3px; }
+  .tech b { color: var(--accent); }
+  .edu p { margin: 0 0 3px; }
+  .edu .deg { font-weight: 700; }
+  .edu .meta { color: var(--muted); font-size: 9.2pt; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>{{ p.name }}</h1>
+  <div class="tagline">{{ p.tagline }}</div>
+  <div class="contact">
+    <span>{{ p.location }}</span>
+    {% if p.phone %}<span>{{ p.phone }}</span>{% endif %}
+    <span>{{ p.email }}</span>
+    <span>{{ p.linkedin }}</span>
+  </div>
+  <div class="portfolio"><span>Portfolio:</span> {{ p.portfolio }}</div>
+</header>
+
+<p class="summary">{{ summary | safe }}</p>
+
+<h2>Signature Work</h2>
+<div class="sig">
+  {% for c in signature %}
+  <div class="card">
+    <div class="m">{{ c.metric }}</div>
+    <div class="l">{{ c.label }}</div>
+    <div class="t">{{ c.tag }}</div>
+    <div class="d">{{ c.detail }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Leadership &amp; Technical Capabilities</h2>
+<div class="caps">
+  {% for col in capabilities %}{% for c in col %}<div class="cap{% if loop.first %} lead{% endif %}">{{ c }}</div>{% endfor %}{% endfor %}
+</div>
+
+{% for e in experience %}
+<h2>Experience — {{ e.employer }}{% if e.tenure %} <span class="sub">· {{ e.tenure }}</span>{% endif %}</h2>
+  {% for r in e.roles %}
+  <div class="role">
+    <div class="role-head">
+      <div class="role-title">{{ r.title }}</div>
+      <div class="dates">{{ r.dates }}</div>
+    </div>
+    <div class="context">{{ r.location }} · {{ r.context }}</div>
+    {% for l in r.lead %}<p class="lead">{{ l | safe }}</p>{% endfor %}
+    {% if r.bullets %}
+    <ul>{% for b in r.bullets %}<li>{{ b | safe }}</li>{% endfor %}</ul>
+    {% endif %}
+  </div>
+  {% endfor %}
+{% endfor %}
+
+<h2>Technical Environment</h2>
+<div class="tech">
+  {% for k, v in tech %}<p><b>{{ k }}:</b> {{ v }}</p>{% endfor %}
+</div>
+
+<h2>Education &amp; Credentials</h2>
+<div class="edu">
+  {% for ed in education %}
+  <p><b>{{ ed.degree }}</b> · {{ ed.school }}, {{ ed.place }} <span class="meta">· {{ ed.years }}</span></p>
+  {% endfor %}
+  {% if credentials %}<p><b>Certifications</b> · <span class="meta">{{ credentials | join(" · ") }}</span></p>{% endif %}
+</div>
+
+</body>
+</html>
