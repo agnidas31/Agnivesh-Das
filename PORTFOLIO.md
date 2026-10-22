@@ -55,6 +55,13 @@ Worked Example (illustrative, labelled) · Built to Scale (optional) · Why This
 Impact (real confirmed numbers first) · footer line.
 Technical file (optional): step-by-step method with formulas and short illustrative SQL/Python.
 
+**Visual one-pager** (BP repos, Oct 2026): each BP repo's `index.html` is a visual summary built from
+`visuals.py` + `templates/visual.html` + `charts.py`: Problem → Approach → My contribution → Output (a mock
+dashboard) → Impact. The written case study is `story.html`, the deep dive `technical.html`.
+**Every chart/table/example number in `visuals.py` is fictitious** (Agnivesh's instruction: no real BP data);
+only the headline results are the confirmed figures. Chart palette (colour-blind validated): blue `#2f5597`,
+copper `#b4541a`, teal `#00927f`. A project without a `VISUALS` entry keeps the story as `index.html`.
+
 ## Adding a new project (the builder workflow)
 
 1. Collect source material from Agnivesh (docs, notes, dashboards) and his exact role and metrics.
@@ -74,11 +81,11 @@ Technical file (optional): step-by-step method with formulas and short illustrat
 | Repo | State |
 |---|---|
 | Agnivesh-Das (hub) | Built and pushed; Pages to be switched on; custom domain pending |
-| Single-Customer-Identifier-BP | Live (story + technical) (pushed; Pages to be switched on) |
-| Customer-Lifetime-Value-BP | Live (story + technical) (pushed; Pages to be switched on) |
-| Global-Fleet-BP | Live (pushed; Pages to be switched on) |
-| Inventory-Over-Short-BP | Live (pushed; Pages to be switched on) |
-| Fuel-Margin-Waterfall-BP | Live (pushed; Pages to be switched on) |
+| Single-Customer-Identifier-BP | Live: visual index + story + technical |
+| Customer-Lifetime-Value-BP | Live: visual index + story + technical |
+| Global-Fleet-BP | Live: visual index + story |
+| Inventory-Over-Short-BP | Live: visual index + story |
+| Fuel-Margin-Waterfall-BP | Live: visual index + story |
 | AIsleOne, CRM-Analysis, Smart-Woofie, Appeasement-Analysis, Agent-Performance-Scorecard, Call-Complexity, Call-Complexity-vs-SSR (all -Walmart) | Live demos (synthetic data) shown in Selected work; each repo serves its own index.html. Agnivesh confirmed he built them (executed the work; his Director was Victor Chowdhury) and approved publishing without a credit line. Pages to be switched on. |
 | bp_projects (private) | Original working copies of the BP write-ups |
 

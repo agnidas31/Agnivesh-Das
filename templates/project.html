@@ -61,12 +61,11 @@
   </div>
 </div>
 <div class="wrap">
-  {% if has_technical %}
   <div class="tabs">
-    <a href="index.html" class="{{ 'on' if page == 'story' else '' }}">The story</a>
-    <a href="technical.html" class="{{ 'on' if page == 'technical' else '' }}">Technical deep dive</a>
+    {% if has_visual %}<a href="index.html">At a glance</a>{% endif %}
+    <a href="{{ 'story.html' if has_visual else 'index.html' }}" class="{{ 'on' if page == 'story' else '' }}">The story</a>
+    {% if has_technical %}<a href="technical.html" class="{{ 'on' if page == 'technical' else '' }}">Technical deep dive</a>{% endif %}
   </div>
-  {% endif %}
   <article>{{ body | safe }}</article>
 </div>
 <div class="foot">

@@ -21,6 +21,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 import content
 import site_content
+import visuals
 
 ROOT = Path(__file__).resolve().parent
 env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]))
@@ -35,7 +36,7 @@ def live_projects():
     for pr in site_content.PROJECTS:
         if pr.get("status") == "live":
             pr = dict(pr, url=project_url(pr["repo"]))
-            pr.setdefault("link_label", "Read the case study")
+            pr.setdefault("link_label", "See the project")
             out.append(pr)
     # Current employer first, then the rest in listed order.
     return sorted(out, key=lambda x: 0 if x["company"] == "Walmart" else 1)
@@ -84,7 +85,7 @@ def build_site() -> None:
         print(f"CNAME -> {domain}")
 
 
-def md_to_page(md_text: str, page: str, has_technical: bool) -> str:
+def md_to_page(md_text: str, page: str, has_technical: bool, has_visual: bool = False) -> str:
     # House style: own labels, not borrowed ones.
     md_text = re.sub(r"^# Creative Solutions: ", "# ", md_text, flags=re.M)
     md_text = md_text.replace("Field-Tested Innovation · ", "Case Study · ")
@@ -96,7 +97,7 @@ def md_to_page(md_text: str, page: str, has_technical: bool) -> str:
     return env.get_template("project.html").render(
         body=body, title=title, description=description[:300], author=content.PROFILE["name"],
         hub_url=site_content.SITE["base_url"], linkedin_url=site_content.SITE["linkedin_url"],
-        page=page, has_technical=has_technical,
+        page=page, has_technical=has_technical, has_visual=has_visual,
     )
 
 
@@ -109,13 +110,19 @@ def build_projects(projects_root: Path) -> None:
             print(f"skip {pr['repo']}: no checkout at {repo_dir}")
             continue
         has_tech = bool(pr.get("technical")) and (repo_dir / pr["technical"]).exists()
+        v = visuals.VISUALS.get(pr["repo"])
         story = (repo_dir / pr["story"]).read_text(encoding="utf-8")
-        (repo_dir / "index.html").write_text(md_to_page(story, "story", has_tech), encoding="utf-8")
+        # With a visual summary: index.html = visual one-pager, story.html = written case study.
+        story_name = "story.html" if v else "index.html"
+        (repo_dir / story_name).write_text(md_to_page(story, "story", has_tech, bool(v)), encoding="utf-8")
+        if v:
+            (repo_dir / "index.html").write_text(env.get_template("visual.html").render(
+                v=v, author=content.PROFILE["name"], hub_url=site_content.SITE["base_url"],
+                linkedin_url=site_content.SITE["linkedin_url"], has_technical=has_tech), encoding="utf-8")
         if has_tech:
             tech = (repo_dir / pr["technical"]).read_text(encoding="utf-8")
-            (repo_dir / "technical.html").write_text(md_to_page(tech, "technical", True), encoding="utf-8")
-        print(f"project -> {repo_dir.name}/index.html{' + technical.html' if has_tech else ''}")
-
+            (repo_dir / "technical.html").write_text(md_to_page(tech, "technical", True, bool(v)), encoding="utf-8")
+        print(f"project -> {repo_dir.name}: {'index (visual) + story' if v else 'index'}{' + technical' if has_tech else ''}")
 
 def main() -> None:
     ap = argparse.ArgumentParser()
