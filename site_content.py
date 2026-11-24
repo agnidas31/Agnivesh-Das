@@ -56,8 +56,8 @@ PROJECTS = [
         "company": "BP",
         "metric": "3 → 1",
         "metric_label": "regions on one view",
-        "summary": "Three regions measuring the same fleet business three different ways, brought into one "
-                   "trusted, comparable report.",
+        "summary": "Fragmented operational data from three regions unified into one view, to monitor asset "
+                   "utilisation and transportation demand and guide commercial and safety decisions.",
         "tags": ["KPI design", "Data governance", "Power BI"],
         "story": "global-fleet-kpi.md",
         "technical": None,

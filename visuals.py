@@ -300,8 +300,7 @@ FLEET = {
     "impact": {
         "results": [("85%", "less report preparation", "The monthly cross-region pack no longer had to be built by hand."),
                     ("3×", "faster decisions", "Fleet managers got answers from one trusted view."),
-                    ("3 → 1", "regions, one report", "ESA, ANZ and the US on a single page."),
-                    ("100%", "of KPIs defined", "Every KPI documented for every region.")],
+                    ("3 → 1", "regions, one report", "ESA, ANZ and the US on a single page.")],
         "before_after": [("Source of numbers", "Separate regional reports", "One report, one data model"),
                          ("Definitions", "Implicit, different per region", "Documented per KPI, per region"),
                          ("Comparisons", "Raw totals, often misleading", "Trends and year-on-year, like for like"),
