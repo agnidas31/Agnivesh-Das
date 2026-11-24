@@ -3,12 +3,12 @@
 Charts are plain HTML (bars, columns, waterfalls) or HTML + a stretched SVG polyline (lines),
 so text never shrinks on phones. Every mark carries a `data-tip` for the hover/tap tooltip, and
 every chart ships a "View data" table. Palette validated for colour-blind separation:
-C1 blue, C2 copper, C3 teal; single-series charts use C1 with C2 as the highlight.
+C1 emerald, C2 amber, C3 indigo; single-series charts use C1 with C2 as the highlight.
 """
 import html
 
-C1, C2, C3 = "#2f5597", "#b4541a", "#00927f"
-TOTAL = "#172340"   # navy, for totals and subtotals
+C1, C2, C3 = "#00866b", "#c97a00", "#5b4fd6"
+TOTAL = "#1c2530"   # graphite, for totals and subtotals
 SOFT = "#c3ccda"    # de-emphasised bars
 
 

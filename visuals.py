@@ -8,6 +8,7 @@ Rules (see PORTFOLIO.md):
   (the same numbers as content.py and the hub cards), and are labelled as reported results.
 - Role, problem and approach text follows the confirmed case studies in each repo.
 """
+import hero_art
 from charts import (C1, C2, C3, columns, data_table, dbars, esc, hbars, line, stacked_hbars, waterfall)
 
 
@@ -116,7 +117,7 @@ SCI = {
                                              (.75, 80.4), (.8, 76.5), (.85, 70.3), (.9, 61.0), (.95, 44.2)])],
                           [(.5, "0.5"), (.6, "0.6"), (.7, "0.7"), (.8, "0.8"), (.9, "0.9"), (.95, "0.95")],
                           .5, .95, 40, 90, [40, 50, 60, 70, 80, 90], suf="%", vline=(.7, "Chosen: 0.7"))},
-            {"title": "Customers now visible, by segment", "sub": "Thousands of customers; copper = newly visible",
+            {"title": "Customers now visible, by segment", "sub": "Thousands of customers; amber = newly visible",
              "wide": True,
              "html": columns([("Engaged loyalty", 310), ("Semi-engaged", 420), ("Unengaged loyalty", 560),
                               ("Card-only (non-loyalty)", 1840), ("Fleet", 95)],
@@ -367,7 +368,7 @@ INVENTORY = {
     "output": {
         "headline": "Where to go first, and what to look for when you get there",
         "panels": [
-            {"title": "Outlier stores", "sub": "Loss per day; copper = above the region's outlier line",
+            {"title": "Outlier stores", "sub": "Loss per day; amber = above the region's outlier line",
              "html": hbars([("Store B", 67), ("Store F", 58), ("Store K", 51), ("Store D", 47), ("Store A", 33),
                             ("Store H", 31), ("Store C", 27), ("Store J", 22)], pre="$",
                            highlight=("Store B", "Store F", "Store K", "Store D"), ref=45, ref_label="Outlier line $45")},
@@ -477,6 +478,10 @@ FUEL = {
         "closing": "From “what was our margin?” to “what moved our margin, and who owns it?”",
     },
 }
+
+for _v, _art in ((SCI, hero_art.sci), (CLV, hero_art.clv), (FLEET, hero_art.fleet),
+                 (INVENTORY, hero_art.inventory), (FUEL, hero_art.fuel)):
+    _v["art"] = _art()
 
 VISUALS = {
     "Single-Customer-Identifier-BP": SCI,

@@ -61,6 +61,10 @@ dashboard) → Impact. The written case study is `story.html`, the deep dive `te
 **Every chart/table/example number in `visuals.py` is fictitious** (Agnivesh's instruction: no real BP data);
 only the headline results are the confirmed figures. Chart palette (colour-blind validated): blue `#2f5597`,
 copper `#b4541a`, teal `#00927f`. A project without a `VISUALS` entry keeps the story as `index.html`.
+**Project-page identity (Nov 2026, Agnivesh asked for more flair and a look distinct from the hub):** graphite
+`#0b0f14` + mint `#5eead4` + amber `#ffb547`, Space Grotesk / Manrope / JetBrains Mono, animated hero art per
+project (`hero_art.py`), outlined section numerals, dashboard mock with sidebar, scroll-reveal and count-up.
+Chart palette (validated): emerald `#00866b`, amber `#c97a00`, indigo `#5b4fd6`. Avoid BP's own green/yellow.
 
 ## Adding a new project (the builder workflow)
 
