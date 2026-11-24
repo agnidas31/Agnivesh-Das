@@ -1,0 +1,87 @@
+  .srcs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .src { border: 1px solid var(--rule); border-radius: 12px; padding: 14px; background: linear-gradient(180deg, #fbfaf7, #fff); position: relative; overflow: hidden; }
+  .src::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, var(--em), var(--mint)); }
+  .src b { display: block; font: 600 16px var(--display); }
+  .src em { display: block; font: 600 11px var(--mono); font-style: normal; color: var(--em); letter-spacing: .5px; text-transform: uppercase; margin: 2px 0 10px; }
+  .src dl { margin: 0; }
+  .src dl div { padding: 7px 0; border-top: 1px dashed var(--rule); }
+  .src dt { font: 500 10.5px var(--mono); text-transform: uppercase; letter-spacing: .6px; color: var(--faint); }
+  .src dd { margin: 0; font-size: 14px; }
+  .nokey { margin-top: 12px; display: flex; align-items: center; gap: 12px; border: 1.5px dashed #e2b56f; border-radius: 12px; padding: 11px 14px; color: #7a4a00; font-weight: 600; font-size: 14.5px; background: repeating-linear-gradient(-45deg, #fffaf1 0 8px, #fff5e4 8px 16px); }
+  .nokey span { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #fff; font-size: 12px; flex: none; }
+  .tbl { overflow-x: auto; }
+  .tbl table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .tbl th, .tbl td { text-align: left; padding: 10px; border-bottom: 1px solid var(--rule); }
+  .tbl th { font: 600 11px var(--mono); letter-spacing: .8px; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .tbl td:first-child { font-family: var(--mono); font-size: 13.5px; white-space: nowrap; }
+  .st { font-weight: 700; font-size: 13px; white-space: nowrap; padding: 3px 9px; border-radius: 99px; }
+  .st.ok { color: var(--ok); background: #e7f5ee; } .st.warn { color: var(--warn); background: #fff2dc; } .st.no { color: var(--no); background: #fbe9e8; }
+
+  /* charts */
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); margin: 0 0 12px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .hb { position: relative; display: grid; gap: 9px; }
+  .hb-row, .db-row { display: grid; grid-template-columns: minmax(90px, 38%) 1fr auto; align-items: center; gap: 10px; font-size: 13.5px; }
+  .hb-l { line-height: 1.25; }
+  .hb-v { color: var(--muted); font: 500 12.5px var(--mono); min-width: 48px; text-align: right; }
+  .hb-t { display: flex; gap: 2px; height: 16px; background: #f1efe9; border-radius: 0 4px 4px 0; }
+  .hb-t i, .db-t i, .col i, .wf-c i, .dot { outline: none; }
+  .hb-t i { display: block; height: 100%; border-radius: 0 4px 4px 0; transform-origin: left; }
+  .hb-t.stack i { border-radius: 0; } .hb-t.stack i:last-child { border-radius: 0 4px 4px 0; }
+  .hb-ref { position: absolute; top: -4px; bottom: -4px; left: calc(min(38%, 100%) + 10px); right: 58px; pointer-events: none; }
+  .hb-ref::before { content: ""; position: absolute; left: var(--x); top: 0; bottom: 0; border-left: 1.5px dashed var(--ink); }
+  .hb-ref span { position: absolute; left: var(--x); bottom: -20px; transform: translateX(-50%); font: 600 11px var(--mono); white-space: nowrap; }
+  .hb:has(.hb-ref) { margin-bottom: 22px; }
+  .db { display: grid; gap: 9px; }
+  .db-t { position: relative; height: 16px; }
+  .db-t::before { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 1.5px solid #9aa3ad; }
+  .db-t i { position: absolute; top: 0; bottom: 0; border-radius: 4px; transform-origin: left; }
+  .db-t i[style*="right:"] { transform-origin: right; }
+  .db-row.hl .hb-l, .db-row.hl .hb-v { font-weight: 700; color: var(--ink); }
+  .cols { display: flex; align-items: flex-end; gap: 6px; height: var(--h); border-bottom: 1.5px solid #9aa3ad; }
+  .col { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+  .col i { display: block; width: 100%; max-width: 72px; border-radius: 4px 4px 0 0; transform-origin: bottom; }
+  .cv { font: 500 11.5px var(--mono); color: var(--muted); margin-bottom: 4px; white-space: nowrap; }
+  .cols-x { display: flex; gap: 6px; margin-top: 6px; }
+  .cols-x span { flex: 1; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.25; }
+  .cols-x span.tot { font-weight: 700; color: var(--ink); }
+  .sx { overflow-x: auto; scrollbar-width: thin; }
+  .wf { position: relative; display: flex; gap: 6px; height: var(--h); border-bottom: 1.5px solid #9aa3ad; margin-top: 18px; }
+  .wf-c { flex: 1; position: relative; height: 100%; }
+  .wf-c i { position: absolute; left: 8%; right: 8%; border-radius: 4px; transform-origin: bottom; }
+  .wf-c i span { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 3px; font: 600 11.5px var(--mono); color: var(--ink); white-space: nowrap; font-style: normal; }
+  .lc { height: var(--h); padding: 6px 10px 26px 44px; }
+  .plot { position: relative; height: 100%; }
+  .plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .gl { position: absolute; left: 0; right: 0; border-top: 1px solid #ebe8e0; }
+  .gl span { position: absolute; right: calc(100% + 8px); top: -9px; font: 500 11px var(--mono); color: var(--faint); white-space: nowrap; }
+  .vl { position: absolute; top: -4px; bottom: 0; border-left: 1.5px dashed var(--ink); }
+  .vl span { position: absolute; top: -2px; left: 6px; font: 600 11px var(--mono); white-space: nowrap; background: rgba(255,255,255,.9); padding: 0 4px; border-radius: 4px; }
+  .dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, 50%); box-shadow: 0 0 0 2px #fff; }
+  .dot::after { content: ""; position: absolute; inset: -8px; }
+  .xl { position: absolute; top: calc(100% + 6px); transform: translateX(-50%); font: 500 11px var(--mono); color: var(--faint); white-space: nowrap; }
+  [data-tip] { cursor: default; }
+  [data-tip]:hover, [data-tip]:focus { filter: brightness(1.15) saturate(1.1); }
+  #tip { position: fixed; z-index: 50; pointer-events: none; background: var(--night); color: #fff; font: 500 12.5px var(--mono); padding: 7px 10px; border-radius: 8px; box-shadow: 0 10px 24px rgba(0,0,0,.25); opacity: 0; transition: opacity .1s; max-width: 260px; border: 1px solid rgba(94,234,212,.35); }
+  .dt { margin-top: 14px; font-size: 12.5px; }
+  .dt summary { cursor: pointer; color: var(--faint); font-family: var(--mono); font-size: 11.5px; letter-spacing: .5px; text-transform: uppercase; }
+  .dt table { margin-top: 8px; border-collapse: collapse; width: 100%; }
+  .dt th, .dt td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--rule); }
+  .readout p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+  .readout b { color: var(--ink); }
+  .readout .calc { font: 500 13px var(--mono); background: var(--night); color: var(--mint); padding: 10px 12px; border-radius: 8px; }
+
+  /* chart entrance motion (added by JS when a panel scrolls into view) */
+  .js .anim .hb-t i, .js .anim .db-t i { transform: scaleX(0); transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .js .anim .col i, .js .anim .wf-c i { transform: scaleY(0); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .js .anim .plot svg { clip-path: inset(0 100% 0 0); transition: clip-path 1.4s cubic-bezier(.4,.1,.2,1); }
+  .js .anim .dot { opacity: 0; transition: opacity .4s .9s; }
+  .js .anim.in .hb-t i, .js .anim.in .db-t i, .js .anim.in .col i, .js .anim.in .wf-c i { transform: none; }
+  .js .anim.in .plot svg { clip-path: inset(0 0 0 0); }
+  .js .anim.in .dot { opacity: 1; }
+  .js .anim .col:nth-child(2) i, .js .anim .wf-c:nth-child(2) i, .js .anim .hb-row:nth-child(2) i { transition-delay: .07s; }
+  .js .anim .col:nth-child(3) i, .js .anim .wf-c:nth-child(3) i, .js .anim .hb-row:nth-child(3) i { transition-delay: .14s; }
+  .js .anim .col:nth-child(4) i, .js .anim .wf-c:nth-child(4) i, .js .anim .hb-row:nth-child(4) i { transition-delay: .21s; }
+  .js .anim .col:nth-child(5) i, .js .anim .wf-c:nth-child(5) i, .js .anim .hb-row:nth-child(5) i { transition-delay: .28s; }
+  .js .anim .col:nth-child(6) i, .js .anim .wf-c:nth-child(6) i, .js .anim .hb-row:nth-child(6) i { transition-delay: .35s; }
+  .js .anim .col:nth-child(n+7) i, .js .anim .wf-c:nth-child(n+7) i, .js .anim .hb-row:nth-child(n+7) i { transition-delay: .42s; }

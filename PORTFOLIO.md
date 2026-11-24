@@ -61,6 +61,12 @@ dashboard) → Impact. The written case study is `story.html`, the deep dive `te
 **Every chart/table/example number in `visuals.py` is fictitious** (Agnivesh's instruction: no real BP data);
 only the headline results are the confirmed figures. Chart palette (colour-blind validated): blue `#2f5597`,
 copper `#b4541a`, teal `#00927f`. A project without a `VISUALS` entry keeps the story as `index.html`.
+**Story-format pages (Nov 24 2026, Agnivesh's choice, modelled on Victor's checkout-and-shrink page):** a project's
+`index.html` is rendered from `narratives.py` + `templates/narrative.html` when it has a `NARRATIVES` entry:
+outcome title ("From X to Y") → 3-sentence intro → byline → "note on this write-up" → overview → 5–7 plain-question
+sections (set-up paragraph, one illustrative chart/table, "so what" paragraph) → "What I built" callouts → results
+tiles → "Why this mattered" + scale tiles. First person, no step diagrams or role cards. Drafts live in
+`narrative_drafts.py` (gitignored) until he approves them. Published: SCI.
 **Project-page identity (Nov 2026, Agnivesh asked for more flair and a look distinct from the hub):** graphite
 `#0b0f14` + mint `#5eead4` + amber `#ffb547`, Space Grotesk / Manrope / JetBrains Mono, animated hero art per
 project (`hero_art.py`), outlined section numerals, dashboard mock with sidebar, scroll-reveal and count-up.

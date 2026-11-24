@@ -22,6 +22,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import content
 import site_content
 import visuals
+import narratives
 
 ROOT = Path(__file__).resolve().parent
 env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]))
@@ -101,6 +102,12 @@ def md_to_page(md_text: str, page: str, has_technical: bool, has_visual: bool = 
     )
 
 
+def render_narrative(n: dict, has_technical: bool) -> str:
+    return env.get_template("narrative.html").render(
+        n=n, author=content.PROFILE["name"], hub_url=site_content.SITE["base_url"],
+        linkedin_url=site_content.SITE["linkedin_url"], has_technical=has_technical)
+
+
 def build_projects(projects_root: Path) -> None:
     for pr in live_projects():
         if not pr.get("story"):
@@ -115,7 +122,10 @@ def build_projects(projects_root: Path) -> None:
         # With a visual summary: index.html = visual one-pager, story.html = written case study.
         story_name = "story.html" if v else "index.html"
         (repo_dir / story_name).write_text(md_to_page(story, "story", has_tech, bool(v)), encoding="utf-8")
-        if v:
+        n = narratives.NARRATIVES.get(pr["repo"])
+        if n:  # story-format page is the project's main page
+            (repo_dir / "index.html").write_text(render_narrative(n, has_tech), encoding="utf-8")
+        elif v:
             (repo_dir / "index.html").write_text(env.get_template("visual.html").render(
                 v=v, author=content.PROFILE["name"], hub_url=site_content.SITE["base_url"],
                 linkedin_url=site_content.SITE["linkedin_url"], has_technical=has_tech), encoding="utf-8")
