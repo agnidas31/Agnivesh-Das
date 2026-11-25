@@ -66,7 +66,9 @@ copper `#b4541a`, teal `#00927f`. A project without a `VISUALS` entry keeps the 
 outcome title ("From X to Y") → 3-sentence intro → byline → "note on this write-up" → overview → 5–7 plain-question
 sections (set-up paragraph, one illustrative chart/table, "so what" paragraph) → "What I built" callouts → results
 tiles → "Why this mattered" + scale tiles. First person, no step diagrams or role cards. Drafts live in
-`narrative_drafts.py` (gitignored) until he approves them. Published: SCI.
+`narrative_drafts.py` (gitignored) until he approves them. Published (Nov 24 2026): all five BP projects.
+Global Fleet purpose (his words): unify fragmented operational data, monitor asset utilisation and transportation
+demand, guide high-value commercial and safety decisions. Do not claim "KPIs defined" as a result; do not name Spain for CLV.
 **Project-page identity (Nov 2026, Agnivesh asked for more flair and a look distinct from the hub):** graphite
 `#0b0f14` + mint `#5eead4` + amber `#ffb547`, Space Grotesk / Manrope / JetBrains Mono, animated hero art per
 project (`hero_art.py`), outlined section numerals, dashboard mock with sidebar, scroll-reveal and count-up.

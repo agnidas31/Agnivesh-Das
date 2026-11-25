@@ -132,7 +132,7 @@ def build_projects(projects_root: Path) -> None:
         if has_tech:
             tech = (repo_dir / pr["technical"]).read_text(encoding="utf-8")
             (repo_dir / "technical.html").write_text(md_to_page(tech, "technical", True, bool(v)), encoding="utf-8")
-        print(f"project -> {repo_dir.name}: {'index (visual) + story' if v else 'index'}{' + technical' if has_tech else ''}")
+        print(f"project -> {repo_dir.name}: {'index (story page) + story' if n else ('index (visual) + story' if v else 'index')}{' + technical' if has_tech else ''}")
 
 def main() -> None:
     ap = argparse.ArgumentParser()
