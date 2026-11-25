@@ -69,13 +69,32 @@ def render_resume_pdf(out_path: Path, phone: str = "") -> None:
     print(f"résumé -> {out_path}")
 
 
+def write_vcard() -> None:
+    """Save-contact card. Deliberately no phone number (public repo)."""
+    p, role = content.PROFILE, content.EXPERIENCE[0]["roles"][0]["title"].split(" — ")[0]
+    lines = ["BEGIN:VCARD", "VERSION:3.0", f"N:Das;Agnivesh;;;", f"FN:{p['name']}",
+             f"TITLE:{role}", f"ORG:{content.EXPERIENCE[0]['employer']}", f"EMAIL;TYPE=INTERNET:{p['email']}",
+             f"URL:{site_content.SITE['base_url']}", f"X-SOCIALPROFILE;TYPE=linkedin:{site_content.SITE['linkedin_url']}",
+             f"ADR;TYPE=WORK:;;;{p['location'].split(',')[0]};{p['location'].split(',')[-1].strip()};;USA", "END:VCARD"]
+    (ROOT / site_content.SITE["vcard_file"]).write_text("\r\n".join(lines) + "\r\n", encoding="utf-8")
+
+
 def build_site() -> None:
+    projects = live_projects()
+    by_repo = {pr["repo"]: pr for pr in projects}
+    featured = [by_repo[r] for r in site_content.FEATURED if r in by_repo]
+    cats = [(c, sum(1 for pr in projects if pr.get("category") == c)) for c in site_content.WORK_CATEGORIES]
+    cats = [(c, n) for c, n in cats if n]
+    write_vcard()
     html = env.get_template("site.html").render(
         p=content.PROFILE, site=site_content.SITE, summary=content.SUMMARY,
         signature=content.SIGNATURE, capabilities=content.CAPABILITIES,
         experience=content.EXPERIENCE, education=content.EDUCATION,
-        credentials=real_credentials(), projects=live_projects(), lenses=site_content.LENSES,
-        year=datetime.date.today().year,
+        credentials=real_credentials(), projects=projects, lenses=site_content.LENSES,
+        year=datetime.date.today().year, featured=featured, work_categories=cats,
+        skills=site_content.SKILLS, skills_visible=site_content.SKILLS_VISIBLE,
+        worked_with=site_content.WORKED_WITH, education_badge=site_content.EDUCATION_BADGE,
+        overview_title=site_content.OVERVIEW_TITLE,
     )
     (ROOT / "index.html").write_text(html, encoding="utf-8")
     print("hub -> index.html")

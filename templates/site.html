@@ -115,37 +115,6 @@
   .lcard h3 { margin: 0 0 6px; font-size: 17px; color: var(--navy); }
   .lcard p { margin: 0; color: var(--muted); font-size: 15px; }
 
-  /* Carousel */
-  .carousel { position: relative; }
-  .viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -22px; padding: 4px 22px 14px; }
-  .viewport::-webkit-scrollbar { display: none; }
-  .track { display: flex; gap: 18px; }
-  .nav-btns { display: flex; gap: 8px; }
-  .cbtn { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--rule); background: #fff; color: var(--navy); font-size: 18px; cursor: pointer; }
-  .cbtn:hover { border-color: var(--navy); }
-  .sample {
-    flex: 0 0 340px; scroll-snap-align: start; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius);
-    overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s;
-  }
-  .sample:hover { box-shadow: 0 12px 30px rgba(23,35,64,.10); transform: translateY(-3px); }
-  .thumb { background: var(--navy); color: #fff; padding: 22px 22px 20px; position: relative; overflow: hidden; min-height: 150px; }
-  .thumb::after { content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(240,163,108,.16); }
-  .thumb .co { font-size: 11.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent-bright); font-weight: 700; }
-  .thumb .big { font-family: "Source Serif 4", Georgia, serif; font-size: 40px; font-weight: 700; margin-top: 14px; line-height: 1; }
-  .thumb .bl { color: #c6cfdf; font-size: 13.5px; margin-top: 6px; }
-  .sbody { padding: 18px 22px 20px; display: flex; flex-direction: column; flex: 1; }
-  .sbody h3 { font-family: "Source Serif 4", Georgia, serif; font-size: 22px; margin: 0 0 8px; color: var(--navy); }
-  .sbody p { color: var(--muted); font-size: 15px; margin: 0 0 14px; flex: 1; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-size: 12px; background: var(--accent-soft); color: var(--accent-ink); padding: 3px 9px; border-radius: 99px; }
-  .go { margin-top: 14px; font-weight: 600; font-size: 14px; color: var(--accent); }
-
-  /* Capabilities */
-  .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .capcol { display: flex; flex-direction: column; gap: 8px; }
-  .cap { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 11px 15px; font-size: 15px; }
-  .cap.lead { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 600; }
-
   /* Timeline */
   .timeline { position: relative; margin-left: 8px; }
   .timeline::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px; background: var(--rule); }
@@ -172,18 +141,91 @@
   footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.1); color: #8f9bb3; font-size: 13px; padding: 22px 0 30px; }
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
+
+  /* Hero layout + photo slot */
+  .hero-grid { display: grid; grid-template-columns: 1fr 260px; gap: 48px; align-items: center; }
+  .hero .intro { font-size: 16.5px; color: #c6cfdf; max-width: 680px; margin: -12px 0 26px; }
+  .photo { width: 240px; height: 240px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(240,163,108,.55); box-shadow: 0 0 0 10px rgba(255,255,255,.04); justify-self: end; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo .mono { width: 100%; height: 100%; display: grid; place-items: center; background: linear-gradient(145deg, #2a3d68, #172340); font: 700 76px "Source Serif 4", Georgia, serif; color: #f0d3bd; letter-spacing: 2px; }
+  .worked { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin-top: 38px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.14); }
+  .worked small { color: #8f9bb3; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 600; }
+  .worked span { font-family: "Source Serif 4", Georgia, serif; font-weight: 700; font-size: 19px; color: #fff; }
+  .worked .edu-badge { font-family: "Inter", sans-serif; font-size: 13px; font-weight: 600; color: var(--accent-bright); border: 1px solid rgba(240,163,108,.45); padding: 4px 11px; border-radius: 99px; }
+
+  /* What I bring */
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill { background: #fff; border: 1px solid var(--rule); border-radius: 99px; padding: 7px 14px; font-size: 14.5px; color: var(--ink); }
+  .skill.more { display: none; }
+  .skills.open .skill.more { display: inline-block; }
+  .skill-toggle { background: var(--accent-soft); color: var(--accent-ink); border: 1px solid #f1d6c3; border-radius: 99px; padding: 7px 14px; font: 600 14px "Inter", sans-serif; cursor: pointer; }
+
+  /* Featured + work cards */
+  .fgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .wgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .sample { background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s; }
+  .sample:hover { box-shadow: 0 12px 30px rgba(23,35,64,.10); transform: translateY(-3px); }
+  .sample[hidden] { display: none; }
+  .thumb { background: var(--navy); color: #fff; padding: 20px 22px 18px; position: relative; overflow: hidden; min-height: 132px; }
+  .thumb::after { content: ""; position: absolute; right: -40px; top: -40px; width: 150px; height: 150px; border-radius: 50%; background: rgba(240,163,108,.16); }
+  .thumb .co { font-size: 11.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent-bright); font-weight: 700; }
+  .thumb .big { font-family: "Source Serif 4", Georgia, serif; font-size: 36px; font-weight: 700; margin-top: 12px; line-height: 1; }
+  .thumb .bl { color: #c6cfdf; font-size: 13.5px; margin-top: 6px; }
+  .feat .thumb { min-height: 150px; }
+  .feat .badge { position: absolute; top: 16px; right: 16px; z-index: 1; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; background: var(--accent); color: #fff; padding: 3px 9px; border-radius: 99px; }
+  .sbody { padding: 16px 20px 18px; display: flex; flex-direction: column; flex: 1; }
+  .cat { font-size: 11.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .sbody h3 { font-family: "Source Serif 4", Georgia, serif; font-size: 21px; margin: 0 0 8px; color: var(--navy); line-height: 1.2; }
+  .sbody p { color: var(--muted); font-size: 14.5px; margin: 0 0 12px; flex: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; background: var(--bg-soft); border: 1px solid var(--rule); color: var(--muted); padding: 2px 9px; border-radius: 99px; }
+  .go { margin-top: 12px; font-weight: 600; font-size: 14px; color: var(--accent); }
+  .all-link { font-weight: 600; font-size: 15px; color: var(--accent); text-decoration: none; white-space: nowrap; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip { border: 1px solid var(--rule); background: #fff; color: var(--muted); padding: 8px 15px; border-radius: 99px; font: 600 14px "Inter", sans-serif; cursor: pointer; }
+  .chip span { color: var(--faint); font-weight: 500; margin-left: 4px; }
+  .chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .chip[aria-pressed="true"] span { color: #b9c3d6; }
+  .sub-h { font: 700 13px "Inter", sans-serif; letter-spacing: 1px; text-transform: uppercase; color: var(--faint); margin: 0 0 14px; }
+
+  /* Experience grouped by employer */
+  .emp { display: grid; grid-template-columns: 230px 1fr; gap: 28px; padding: 28px 0; border-top: 1px solid var(--rule); }
+  .emp:first-of-type { border-top: 0; padding-top: 4px; }
+  .emp[hidden] { display: none; }
+  .emp-name { font-family: "Source Serif 4", Georgia, serif; font-size: 24px; font-weight: 700; color: var(--navy); line-height: 1.15; }
+  .emp-meta { color: var(--faint); font-size: 14px; margin-top: 6px; }
+  .role { position: relative; padding: 0 0 22px 26px; }
+  .role:last-child { padding-bottom: 0; }
+  .role::before { content: ""; position: absolute; left: 0; top: 7px; width: 11px; height: 11px; border-radius: 50%; border: 3px solid var(--accent); background: #fff; }
+  .role::after { content: ""; position: absolute; left: 6px; top: 22px; bottom: 2px; width: 2px; background: var(--rule); }
+  .role:last-child::after { display: none; }
+  .role h3 { margin: 0; font-size: 17.5px; color: var(--navy); }
+  .role .when { font-size: 13.5px; color: var(--faint); font-weight: 600; margin-top: 2px; }
+  .role .ctx { color: var(--accent-ink); font-size: 14px; margin-top: 6px; }
+  .role p { color: var(--muted); font-size: 15px; margin: 6px 0 0; }
+  .role p b { color: var(--ink); font-weight: 600; }
+  .more-roles { margin-top: 18px; background: #fff; border: 1px solid var(--rule); border-radius: 99px; padding: 9px 18px; font: 600 14px "Inter", sans-serif; color: var(--navy); cursor: pointer; }
+  .more-roles:hover { border-color: var(--navy); }
+
   @media (max-width: 980px) {
     .impact { grid-template-columns: repeat(2, 1fr); }
     .about { grid-template-columns: 1fr; gap: 10px; }
+    .fgrid, .wgrid { grid-template-columns: repeat(2, 1fr); }
+    .hero-grid { grid-template-columns: 1fr 190px; gap: 28px; }
+    .photo { width: 180px; height: 180px; } .photo .mono { font-size: 58px; }
+    .nav ul { gap: 16px; }
   }
   @media (max-width: 760px) {
     .nav ul { display: none; }
     .menu-btn { display: block; }
-    .hero .wrap { padding-top: 56px; padding-bottom: 54px; }
+    .hero .wrap { padding-top: 44px; padding-bottom: 50px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .photo { order: -1; justify-self: start; width: 112px; height: 112px; border-width: 2px; } .photo .mono { font-size: 38px; }
     section { padding: 58px 0; }
-    .impact, .lgrid, .caps, .edu { grid-template-columns: 1fr; }
-    .sample { flex-basis: 84%; }
-    .nav-btns { display: none; }
+    .impact, .lgrid, .edu, .fgrid, .wgrid { grid-template-columns: 1fr; }
+    .emp { grid-template-columns: 1fr; gap: 14px; }
+    .head-row { flex-direction: column; align-items: flex-start; gap: 0; }
+    .head-row .all-link { margin: -18px 0 22px; }
   }
 </style>
 </head>
@@ -194,163 +236,171 @@
   <div class="wrap">
     <a class="brand" href="#top">{{ p.name }}</a>
     <ul>
+      <li><a href="#overview">Overview</a></li>
       <li><a href="#impact">Impact</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#lenses">How I work</a></li>
-      <li><a href="#samples">Work samples</a></li>
-      <li><a href="#career">Career</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="{{ site.linkedin_url }}" target="_blank" rel="noopener">LinkedIn ↗</a></li>
       <li><a class="pill" href="#contact">Contact</a></li>
     </ul>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="#impact">Impact</a><a href="#about">About</a><a href="#lenses">How I work</a>
-    <a href="#samples">Work samples</a><a href="#career">Career</a><a href="#contact">Contact</a>
+    <a href="#overview">Overview</a><a href="#impact">Impact</a><a href="#experience">Experience</a>
+    <a href="#work">Work</a><a href="#education">Education</a><a href="#contact">Contact</a>
+    <a href="{{ site.linkedin_url }}" target="_blank" rel="noopener">LinkedIn ↗</a>
   </div>
 </nav>
 
+<!-- 1. Hero -->
 <header class="hero" id="top">
-  <div class="wrap">
-    <div class="eyebrow">{{ site.hero_title }}</div>
-    <h1>{{ p.name }}</h1>
-    <p class="line">{{ site.hero_line }}</p>
-    <div class="cta">
-      <a class="btn primary" href="#samples">See my work</a>
-      <a class="btn light" href="{{ site.resume_file }}" download>Download résumé</a>
-      <a class="btn light" href="{{ site.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>
+  <div class="wrap hero-grid" style="padding-bottom:0">
+    <div>
+      <div class="eyebrow">{{ site.hero_title }}</div>
+      <h1>{{ p.name }}</h1>
+      <p class="line">{{ site.hero_line }}</p>
+      <p class="intro">{{ p.location }} · 13+ years in data, analytics &amp; AI · Leading a team of 8+ at Walmart Customer Engagement Services</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn light" href="{{ site.resume_file }}" download>Download résumé</a>
+        <a class="btn light" href="{{ site.vcard_file }}" download>Save contact</a>
+        <a class="btn light" href="{{ site.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
-    <div class="facts">
-      <div><b>13+ years</b>in data, analytics & AI</div>
-      <div><b>Walmart · BP · Nike</b>enterprise scale</div>
-      <div><b>8+ team</b>across four pillars</div>
-      <div><b>{{ p.location }}</b>based</div>
-    </div>
+    <div class="photo">{% if site.photo %}<img src="{{ site.photo }}" alt="{{ p.name }}">{% else %}<div class="mono" aria-label="{{ p.name }}">AD</div>{% endif %}</div>
+  </div>
+  <div class="wrap" style="padding-top:0">
+    <div class="worked"><small>Worked with</small>{% for w in worked_with %}<span>{{ w }}</span>{% endfor %}<em class="edu-badge" style="font-style:normal">🎓 {{ education_badge }}</em></div>
   </div>
 </header>
 
+<!-- 2. Overview -->
+<section id="overview">
+  <div class="wrap about">
+    <div>
+      <p class="kicker">Overview</p>
+      <h2>{{ overview_title }}</h2>
+    </div>
+    <div><p>{{ summary | safe }}</p></div>
+  </div>
+</section>
+
+<!-- 3. What I bring -->
+<section class="soft" id="skills">
+  <div class="wrap">
+    <p class="kicker">What I bring</p>
+    <h2>Skills &amp; tools</h2>
+    <p class="sub">Leadership, AI and customer analytics, and the data engineering underneath.</p>
+    <div class="skills" id="skills-list">
+      {% for s in skills %}<span class="skill{{ ' more' if loop.index > skills_visible else '' }}">{{ s }}</span>{% endfor %}
+      {% if skills|length > skills_visible %}<button class="skill-toggle" id="skillsBtn" aria-expanded="false">+{{ skills|length - skills_visible }} more</button>{% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- 4. Impact -->
 <section id="impact">
   <div class="wrap">
-    <p class="kicker">Signature work</p>
-    <h2>Impact by the numbers</h2>
+    <p class="kicker">Impact</p>
+    <h2>Impact, by the numbers</h2>
     <p class="sub">Results from the work, each tied to the project behind it.</p>
     <div class="impact">
       {% for c in signature %}
-      <div class="icard">
-        <div class="m">{{ c.metric }}</div>
-        <div class="l">{{ c.label }}</div>
-        <div class="t">{{ c.tag }}</div>
-        <div class="d">{{ c.detail }}</div>
-      </div>
+      <div class="icard"><div class="m">{{ c.metric }}</div><div class="l">{{ c.label }}</div><div class="t">{{ c.tag }}</div><div class="d">{{ c.detail }}</div></div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="soft" id="about">
-  <div class="wrap about">
-    <div>
-      <p class="kicker">About</p>
-      <h2>From rear-view reporting to steering the business</h2>
+{% macro card(pr, feat=False) -%}
+<a class="sample{{ ' feat' if feat else '' }}" href="{{ pr.url }}" data-cat="{{ pr.category }}">
+  <div class="thumb">{% if feat %}<span class="badge">Featured</span>{% endif %}
+    <div class="co">{{ pr.company }}</div><div class="big">{{ pr.metric }}</div><div class="bl">{{ pr.metric_label }}</div>
+  </div>
+  <div class="sbody">
+    <div class="cat">{{ pr.category }}</div>
+    <h3>{{ pr.title }}</h3>
+    <p>{{ pr.summary }}</p>
+    <div class="tags">{% for t in pr.tags %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+    <div class="go">{{ pr.link_label }} →</div>
+  </div>
+</a>
+{%- endmacro %}
+
+<!-- 5. Featured -->
+<section class="soft" id="featured">
+  <div class="wrap">
+    <div class="head-row">
+      <div><p class="kicker">Featured</p><h2>Featured work</h2><p class="sub">Three projects to start with.</p></div>
+      <a class="all-link" href="#work">All {{ projects|length }} work samples →</a>
     </div>
-    <div>
-      <p>{{ summary | safe }}</p>
-    </div>
+    <div class="fgrid">{% for pr in featured %}{{ card(pr, True) }}{% endfor %}</div>
   </div>
 </section>
 
-<section id="lenses">
+<!-- 6. Experience -->
+<section id="experience">
   <div class="wrap">
-    <p class="kicker">How I work</p>
+    <p class="kicker">Experience</p>
+    <h2>Career</h2>
+    <p class="sub">13+ years across retail, energy, apparel and healthcare.</p>
+    {% for e in experience %}
+    <div class="emp"{% if loop.index > 2 %} hidden data-earlier{% endif %}>
+      <div><div class="emp-name">{{ e.employer }}</div><div class="emp-meta">{{ e.roles[0].location }}{% if e.tenure %} · {{ e.tenure }}{% endif %}</div></div>
+      <div>
+        {% for r in e.roles %}
+        <div class="role">
+          <h3>{{ r.title }}</h3>
+          <div class="when">{{ r.dates }}</div>
+          <div class="ctx">{{ r.context }}</div>
+          <p>{{ (r.lead[0] if r.lead is not string else r.lead) | safe }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    {% if experience|length > 2 %}<button class="more-roles" id="rolesBtn" aria-expanded="false">Show {{ experience|length - 2 }} earlier employers ↓</button>{% endif %}
+  </div>
+</section>
+
+<!-- 7. Highlights by area -->
+<section class="soft" id="lenses">
+  <div class="wrap">
+    <p class="kicker">Highlights by area</p>
     <h2>Three lenses on the same job</h2>
     <p class="sub">Leading the work, applying AI and analytics to real problems, and building the foundations underneath.</p>
     <div class="tabs" role="tablist">
-      {% for l in lenses %}
-      <button class="tab" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}" data-target="lens-{{ l.id }}">{{ l.title }}</button>
-      {% endfor %}
+      {% for l in lenses %}<button class="tab" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}" data-target="lens-{{ l.id }}">{{ l.title }}</button>{% endfor %}
     </div>
     {% for l in lenses %}
     <div class="panel{{ ' active' if loop.first else '' }}" id="lens-{{ l.id }}" role="tabpanel">
       <p class="blurb">{{ l.blurb }}</p>
-      <div class="lgrid">
-        {% for t, d in l["items"] %}<div class="lcard"><h3>{{ t }}</h3><p>{{ d }}</p></div>{% endfor %}
-      </div>
+      <div class="lgrid">{% for t, d in l["items"] %}<div class="lcard"><h3>{{ t }}</h3><p>{{ d }}</p></div>{% endfor %}</div>
     </div>
     {% endfor %}
   </div>
 </section>
 
-<section class="soft" id="samples">
+<!-- 8. Work -->
+<section id="work">
   <div class="wrap">
-    <div class="head-row">
-      <div>
-        <p class="kicker">Work samples</p>
-        <h2>Selected work</h2>
-        <p class="sub" style="margin-bottom:24px">Live demos and case studies of work I've built. Demos run on synthetic data; worked examples use illustrative numbers.</p>
-      </div>
-      <div class="nav-btns">
-        <button class="cbtn" data-scroll="-1" aria-label="Scroll left">←</button>
-        <button class="cbtn" data-scroll="1" aria-label="Scroll right">→</button>
-      </div>
+    <p class="kicker">Work</p>
+    <h2>Work samples</h2>
+    <p class="sub">Live demos and case studies. Demos run on synthetic data; case studies use illustrative numbers.</p>
+    <div class="filters" role="group" aria-label="Filter work samples">
+      <button class="chip" aria-pressed="true" data-filter="all">All<span>{{ projects|length }}</span></button>
+      {% for c, n in work_categories %}<button class="chip" aria-pressed="false" data-filter="{{ c }}">{{ c }}<span>{{ n }}</span></button>{% endfor %}
     </div>
-    <div class="carousel">
-      <div class="viewport" id="samplesViewport">
-        <div class="track">
-          {% for pr in projects %}
-          <a class="sample" href="{{ pr.url }}">
-            <div class="thumb">
-              <div class="co">{{ pr.company }}</div>
-              <div class="big">{{ pr.metric }}</div>
-              <div class="bl">{{ pr.metric_label }}</div>
-            </div>
-            <div class="sbody">
-              <h3>{{ pr.title }}</h3>
-              <p>{{ pr.summary }}</p>
-              <div class="tags">{% for t in pr.tags %}<span class="tag">{{ t }}</span>{% endfor %}</div>
-              <div class="go">{{ pr.link_label }} →</div>
-            </div>
-          </a>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
+    <div class="wgrid" id="workGrid">{% for pr in projects %}{{ card(pr) }}{% endfor %}</div>
   </div>
 </section>
 
-<section id="capabilities">
-  <div class="wrap">
-    <p class="kicker">Capabilities</p>
-    <h2>Leadership &amp; technical capabilities</h2>
-    <p class="sub">The skills behind the results.</p>
-    <div class="caps">
-      {% for col in capabilities %}
-      <div class="capcol">{% for c in col %}<div class="cap{% if loop.first %} lead{% endif %}">{{ c }}</div>{% endfor %}</div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="soft" id="career">
-  <div class="wrap">
-    <p class="kicker">Career</p>
-    <h2>Career timeline</h2>
-    <p class="sub">13+ years across retail, energy, apparel and healthcare.</p>
-    <div class="timeline">
-      {% for e in experience %}{% for r in e.roles %}
-      <div class="tl">
-        <div class="when">{{ r.dates }}</div>
-        <h3>{{ r.title }}</h3>
-        <div class="org">{{ e.employer }} · {{ r.location }}</div>
-        <ul>{% for b in r.lead[:2] %}<li>{{ b | safe }}</li>{% endfor %}</ul>
-      </div>
-      {% endfor %}{% endfor %}
-    </div>
-  </div>
-</section>
-
-<section id="education">
+<!-- 9. Education -->
+<section class="soft" id="education">
   <div class="wrap">
     <p class="kicker">Education</p>
-    <h2>Education &amp; credentials</h2>
+    <h2>Education</h2>
     <p class="sub"></p>
     <div class="edu">
       {% for ed in education %}<div class="ecard"><b>{{ ed.degree }}</b><span>{{ ed.school }} · {{ ed.place }} · {{ ed.years }}</span></div>{% endfor %}
@@ -359,6 +409,7 @@
   </div>
 </section>
 
+<!-- 10. Contact -->
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Let's talk</h2>
@@ -366,36 +417,41 @@
     <div class="cta">
       <a class="btn primary" href="mailto:{{ p.email }}">{{ p.email }}</a>
       <a class="btn light" href="{{ site.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn light" href="{{ site.vcard_file }}" download>Save contact</a>
       <a class="btn light" href="{{ site.resume_file }}" download>Résumé (PDF)</a>
     </div>
   </div>
 </section>
 <footer>
-  <div class="wrap"><span>© {{ year }} {{ p.name }}</span><span>Built from a single content file · GitHub Pages</span></div>
+  <div class="wrap"><span>© {{ year }} {{ p.name }} · {{ p.location }}</span><span><a href="{{ site.resume_file }}" download style="color:#c6cfdf">Download résumé</a></span></div>
 </footer>
 
 <script>
-  // Scroll progress bar
   const bar = document.getElementById('progress');
-  addEventListener('scroll', () => {
-    const h = document.documentElement;
-    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
-  }, { passive: true });
-  // Mobile menu
+  addEventListener('scroll', () => { const h = document.documentElement; bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%'; }, { passive: true });
   const mb = document.getElementById('menuBtn'), mp = document.getElementById('mobilePanel');
   mb.addEventListener('click', () => { const o = mp.classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
   mp.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mp.classList.remove('open')));
+  // Skills "+N more"
+  const sb = document.getElementById('skillsBtn');
+  if (sb) { const label = sb.textContent; sb.addEventListener('click', () => {
+    const o = document.getElementById('skills-list').classList.toggle('open'); sb.setAttribute('aria-expanded', o); sb.textContent = o ? 'Show fewer' : label; }); }
+  // Earlier employers
+  const rb = document.getElementById('rolesBtn');
+  if (rb) { const label = rb.textContent; rb.addEventListener('click', () => {
+    const els = document.querySelectorAll('[data-earlier]'); const show = els[0].hidden;
+    els.forEach(e => e.hidden = !show); rb.setAttribute('aria-expanded', show); rb.textContent = show ? 'Show fewer ↑' : label; }); }
   // Lens tabs
   document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', 'false'));
     document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
-    t.setAttribute('aria-selected', 'true');
-    document.getElementById(t.dataset.target).classList.add('active');
+    t.setAttribute('aria-selected', 'true'); document.getElementById(t.dataset.target).classList.add('active');
   }));
-  // Carousel buttons
-  const vp = document.getElementById('samplesViewport');
-  document.querySelectorAll('[data-scroll]').forEach(b => b.addEventListener('click', () => {
-    vp.scrollBy({ left: Number(b.dataset.scroll) * 360, behavior: 'smooth' });
+  // Work filters
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', 'false')); c.setAttribute('aria-pressed', 'true');
+    const f = c.dataset.filter;
+    document.querySelectorAll('#workGrid .sample').forEach(s => s.hidden = !(f === 'all' || s.dataset.cat === f));
   }));
 </script>
 </body>

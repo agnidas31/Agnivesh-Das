@@ -16,6 +16,10 @@ SITE = {
     "resume_file": "Agnivesh_Das_Resume.pdf",
     "linkedin_url": "https://www.linkedin.com/in/agnivesh-das/",
     "hero_title": "Data Analytics & AI Leader",
+    # Headshot: put the image in this repo (e.g. "photo.jpg") and set its file name here.
+    # While empty, the hero shows an initials monogram in the photo's place.
+    "photo": "",
+    "vcard_file": "Agnivesh_Das.vcf",
     "hero_line": "I turn fragmented enterprise data into decisions leaders trust, and build the AI that puts "
                  "those answers in their hands.",
 }
@@ -26,6 +30,7 @@ SITE = {
 PROJECTS = [
     {
         "repo": "Single-Customer-Identifier-BP",
+        "category": "Customer analytics",
         "title": "Single Customer Identifier",
         "company": "BP",
         "metric": "38%",
@@ -39,6 +44,7 @@ PROJECTS = [
     },
     {
         "repo": "Customer-Lifetime-Value-BP",
+        "category": "Customer analytics",
         "title": "Customer Lifetime Value",
         "company": "BP",
         "metric": "4×",
@@ -52,6 +58,7 @@ PROJECTS = [
     },
     {
         "repo": "Global-Fleet-BP",
+        "category": "Retail & operations",
         "title": "Global Fleet KPI Report",
         "company": "BP",
         "metric": "3 → 1",
@@ -65,6 +72,7 @@ PROJECTS = [
     },
     {
         "repo": "Inventory-Over-Short-BP",
+        "category": "Retail & operations",
         "title": "Inventory Over & Short",
         "company": "BP",
         "metric": "22%",
@@ -78,6 +86,7 @@ PROJECTS = [
     },
     {
         "repo": "Fuel-Margin-Waterfall-BP",
+        "category": "Retail & operations",
         "title": "Fuel Margin Waterfall",
         "company": "BP",
         "metric": "2×",
@@ -93,6 +102,7 @@ PROJECTS = [
     # They have no Markdown case study, so build.py links straight to each repo's own index.html.
     {
         "repo": "AIsleOne-Walmart",
+        "category": "Customer care",
         "title": "AISLE One CRM Dashboards",
         "company": "Walmart",
         "metric": "6",
@@ -104,6 +114,7 @@ PROJECTS = [
     },
     {
         "repo": "CRM-Analysis-Walmart",
+        "category": "AI & agents",
         "title": "Agent Assist Impact",
         "company": "Walmart",
         "metric": "23%",
@@ -115,6 +126,7 @@ PROJECTS = [
     },
     {
         "repo": "Smart-Woofie-Walmart",
+        "category": "AI & agents",
         "title": "Smart Woffie",
         "company": "Walmart",
         "metric": "4B+",
@@ -126,6 +138,7 @@ PROJECTS = [
     },
     {
         "repo": "Appeasement-Analysis-Walmart",
+        "category": "Customer analytics",
         "title": "Appeasement & Promo Analysis",
         "company": "Walmart",
         "metric": "45% → 71%",
@@ -137,6 +150,7 @@ PROJECTS = [
     },
     {
         "repo": "Agent-Performance-Scorecard-Walmart",
+        "category": "Customer care",
         "title": "Agent Performance Scorecard",
         "company": "Walmart",
         "metric": "10",
@@ -148,6 +162,7 @@ PROJECTS = [
     },
     {
         "repo": "Call-Complexity-Walmart",
+        "category": "Customer care",
         "title": "Call Complexity Scorecard",
         "company": "Walmart",
         "metric": "6",
@@ -159,6 +174,7 @@ PROJECTS = [
     },
     {
         "repo": "Call-Complexity-vs-SSR-Walmart",
+        "category": "Customer care",
         "title": "Self-Serve vs. Call Complexity",
         "company": "Walmart",
         "metric": "SSR",
@@ -169,6 +185,23 @@ PROJECTS = [
         "status": "live", "link_label": "Open the demo",
     },
 ]
+
+# Homepage structure (modelled on Victor Chowdhury's layout, own wording).
+WORK_CATEGORIES = ["AI & agents", "Customer care", "Customer analytics", "Retail & operations"]
+FEATURED = ["Smart-Woofie-Walmart", "CRM-Analysis-Walmart", "Single-Customer-Identifier-BP"]  # 3 cards, in order
+WORKED_WITH = ["Walmart", "BP", "Nike", "EmblemHealth"]
+EDUCATION_BADGE = "George Washington University"
+OVERVIEW_TITLE = "From rear-view reporting to steering the business"
+# "What I bring": skill chips. The first SKILLS_VISIBLE show; the rest sit behind "+N more".
+SKILLS = [
+    "AI & analytics strategy", "Agentic AI", "Conversational AI analytics", "Team leadership", "Executive storytelling",
+    "Measurement frameworks", "Governed metrics & semantic layers", "Customer data unification",
+    "Customer lifetime value", "Survival analysis", "Customer segmentation", "Self-service analytics",
+    "Data modeling & governance", "Data pipelines & ETL", "BI & dashboard development", "Stakeholder management",
+    "Fuel, fleet & shrink analytics", "Natural-language querying",
+    "SQL", "Python", "PySpark", "BigQuery", "AWS", "Teradata", "Palantir Foundry", "Tableau", "Power BI", "Claude",
+]
+SKILLS_VISIBLE = 18
 
 # "Ways I work" lenses: tabbed section on the hub. Each item is a short, confirmed anecdote.
 LENSES = [

@@ -114,10 +114,19 @@ Chart palette (validated): emerald `#00866b`, amber `#c97a00`, indigo `#5b4fd6`.
   Navy `#172340` base with a **copper accent `#b4541a`** (Victor uses teal), Source Serif 4 headings, Inter body.
   The résumé PDF still uses teal `#0e5a63` with Lora/Carlito; align it if Agnivesh asks.
 
+- Homepage structure (Nov 25 2026, Agnivesh's request, modelled on victorbuildsai.com, own wording): hero with photo slot
+  (`SITE["photo"]`, initials monogram until set) + Download résumé / Save contact (vCard, no phone) / LinkedIn, and a
+  "Worked with" row → Overview → What I bring (skill chips, `SKILLS`) → Impact → Featured (3, `FEATURED`) → Experience
+  grouped by employer (earlier employers behind a toggle) → Highlights by area (lenses) → Work (filterable by
+  `WORK_CATEGORIES`) → Education → Contact. He does NOT want "Check my fit" or an AI chat bot. Sections with nothing to
+  show (certifications, awards, recommendations, articles) stay out until he supplies content. Booking service: next.
+
 ## Open items
 
 - Custom domain name.
 - Walmart case-study material and sign-off.
 - Certifications (none listed yet; `CREDENTIALS` hides placeholders automatically).
+- Headshot photo for the hero (set `SITE["photo"]`).
+- Booking service for "Book a call" (e.g. Calendly / Google Calendar appointment page).
 - Fuel Margin Waterfall: integrated/environment margin definitions are a reading of dashboard labels; confirm with Agnivesh.
 - EmblemHealth: confirm "Led" vs "Ran" for user acceptance testing.
