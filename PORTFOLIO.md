@@ -118,7 +118,9 @@ Chart palette (validated): emerald `#00866b`, amber `#c97a00`, indigo `#5b4fd6`.
   (`SITE["photo"]`, initials monogram until set) + Download résumé / Save contact (vCard, no phone) / LinkedIn, and a
   "Worked with" row → Overview → What I bring (skill chips, `SKILLS`) → Impact → Featured (3, `FEATURED`) → Experience
   grouped by employer (earlier employers behind a toggle) → Highlights by area (lenses) → Work (filterable by
-  `WORK_CATEGORIES`) → Education → Contact. He does NOT want "Check my fit" or an AI chat bot. Sections with nothing to
+  `WORK_CATEGORIES`) → Education → Contact. Navigation (his request, like Victor's): a profile card (banner, photo, name, buttons, Worked with / Studied at) with
+  tabs Overview / Experience / Work samples / Education; each tab shows ONLY its section (hash-routed: #overview,
+  #experience, #work, #education; deep links to inner sections like #featured open the right tab). He does NOT want "Check my fit" or an AI chat bot. Sections with nothing to
   show (certifications, awards, recommendations, articles) stay out until he supplies content. Booking service: next.
 
 ## Open items

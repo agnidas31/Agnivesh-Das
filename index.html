@@ -30,7 +30,7 @@
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  html, body { overflow-x: hidden; }
+  html, body { overflow-x: clip; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.6;
@@ -207,6 +207,46 @@
   .more-roles { margin-top: 18px; background: #fff; border: 1px solid var(--rule); border-radius: 99px; padding: 9px 18px; font: 600 14px "Inter", sans-serif; color: var(--navy); cursor: pointer; }
   .more-roles:hover { border-color: var(--navy); }
 
+
+  /* ---- Profile card + tabbed sections (one section visible at a time) ---- */
+  body { background: #eef0f4; }
+  .page { max-width: 1140px; margin: 0 auto; padding: 0 22px; }
+  .profile { background: #fff; border: 1px solid var(--rule); border-radius: 18px; overflow: hidden; margin-top: 28px; box-shadow: 0 12px 36px -24px rgba(23,35,64,.35); }
+  .banner { position: relative; height: 200px; background: var(--navy); overflow: hidden; }
+  .banner::before { content: ""; position: absolute; inset: 0; background: radial-gradient(500px 220px at 80% 0%, rgba(240,163,108,.22), transparent 70%), radial-gradient(400px 200px at 10% 100%, rgba(255,255,255,.06), transparent 70%); }
+  .banner svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .pbody { position: relative; display: grid; grid-template-columns: 1.25fr 1fr; gap: 36px; padding: 0 40px 30px; }
+  .avatar { width: 168px; height: 168px; border-radius: 50%; border: 6px solid #fff; margin-top: -90px; overflow: hidden; background: #fff; box-shadow: 0 8px 24px rgba(23,35,64,.25); position: relative; z-index: 1; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avatar .mono { width: 100%; height: 100%; display: grid; place-items: center; background: linear-gradient(145deg, #2a3d68, #172340); font: 700 56px "Source Serif 4", Georgia, serif; color: #f0d3bd; letter-spacing: 2px; }
+  .pbody h1 { font-family: "Source Serif 4", Georgia, serif; font-size: clamp(34px, 4.6vw, 48px); line-height: 1.05; color: var(--navy); margin: 18px 0 8px; }
+  .pbody .headline { font-size: 19px; color: var(--ink); margin: 0 0 12px; line-height: 1.45; }
+  .pbody .pitch { color: var(--muted); font-size: 16.5px; margin: 0 0 16px; line-height: 1.65; }
+  .pbody .meta { color: var(--muted); font-size: 15px; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; margin-bottom: 22px; }
+  .pbody .meta svg { width: 16px; height: 16px; flex: none; }
+  .pbody .cta .btn.primary { background: var(--accent); color: #fff; }
+  .btn.ghost { background: #fff; color: var(--navy); border-color: #cfd5df; }
+  .btn.ghost:hover { border-color: var(--navy); }
+  .orgs { display: flex; gap: 26px; padding-top: 30px; align-self: start; }
+  .orgs .grp + .grp { border-left: 1px solid var(--rule); padding-left: 26px; }
+  .orgs h4 { margin: 0 0 12px; font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .tiles { display: flex; flex-wrap: wrap; gap: 12px; }
+  .otile { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 64px; }
+  .otile i { width: 54px; height: 54px; border-radius: 12px; border: 1px solid var(--rule); background: var(--bg-soft); display: grid; place-items: center; font: 700 17px "Source Serif 4", Georgia, serif; font-style: normal; color: var(--navy); }
+  .otile span { font-size: 12.5px; color: var(--muted); text-align: center; line-height: 1.2; }
+  .tabbar { display: flex; gap: 6px; border-top: 1px solid var(--rule); padding: 10px 28px; overflow-x: auto; scrollbar-width: none; scroll-margin-top: 70px; }
+  .tabbar::-webkit-scrollbar { display: none; }
+  .tabbar a { flex: none; padding: 10px 16px; border-radius: 10px; color: var(--muted); text-decoration: none; font-weight: 600; font-size: 16px; border: 1.5px solid transparent; }
+  .tabbar a:hover { color: var(--navy); background: var(--bg-soft); }
+  .tabbar a[aria-selected="true"] { color: var(--accent-ink); border-color: var(--accent); background: var(--accent-soft); }
+  .nav ul a[aria-current="true"] { color: var(--accent); }
+  .panels { padding: 18px 0 40px; }
+  .js [data-panel][hidden] { display: none; }
+  section.block { padding: 0; margin: 0 0 18px; }
+  section.block > .wrap { background: #fff; border: 1px solid var(--rule); border-radius: 18px; padding: 40px; max-width: none; }
+  section.block .about { gap: 40px; }
+  .contact { margin-top: 0; }
+
   @media (max-width: 980px) {
     .impact { grid-template-columns: repeat(2, 1fr); }
     .about { grid-template-columns: 1fr; gap: 10px; }
@@ -227,6 +267,23 @@
     .head-row { flex-direction: column; align-items: flex-start; gap: 0; }
     .head-row .all-link { margin: -18px 0 22px; }
   }
+  @media (max-width: 980px) {
+    .pbody { grid-template-columns: 1fr; gap: 0; }
+    .orgs { padding-top: 18px; }
+  }
+  @media (max-width: 760px) {
+    .page { padding: 0 12px; }
+    .profile { margin-top: 12px; border-radius: 14px; }
+    .banner { height: 130px; }
+    .pbody { padding: 0 20px 22px; }
+    .avatar { width: 112px; height: 112px; margin-top: -60px; border-width: 4px; }
+    .avatar .mono { font-size: 38px; }
+    .orgs { flex-direction: column; gap: 16px; }
+    .orgs .grp + .grp { border-left: 0; padding-left: 0; }
+    .tabbar { padding: 8px 12px; }
+    .tabbar a { font-size: 15px; padding: 9px 13px; }
+    section.block > .wrap { padding: 26px 20px; border-radius: 14px; }
+  }
 </style>
 </head>
 <body>
@@ -234,49 +291,71 @@
 
 <nav class="nav">
   <div class="wrap">
-    <a class="brand" href="#top">Agnivesh Das</a>
+    <a class="brand" href="#overview">Agnivesh Das</a>
     <ul>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#impact">Impact</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#education">Education</a></li>
+      <li><a href="#overview" data-tab-link="overview">Overview</a></li>
+      <li><a href="#experience" data-tab-link="experience">Experience</a></li>
+      <li><a href="#work" data-tab-link="work">Work</a></li>
+      <li><a href="#education" data-tab-link="education">Education</a></li>
       <li><a href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
       <li><a class="pill" href="#contact">Contact</a></li>
     </ul>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="#overview">Overview</a><a href="#impact">Impact</a><a href="#experience">Experience</a>
-    <a href="#work">Work</a><a href="#education">Education</a><a href="#contact">Contact</a>
-    <a href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="#overview">Overview</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#education">Education</a>
+    <a href="#contact">Contact</a><a href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn ↗</a>
   </div>
 </nav>
 
-<!-- 1. Hero -->
-<header class="hero" id="top">
-  <div class="wrap hero-grid" style="padding-bottom:0">
-    <div>
-      <div class="eyebrow">Data Analytics &amp; AI Leader</div>
-      <h1>Agnivesh Das</h1>
-      <p class="line">I turn fragmented enterprise data into decisions leaders trust, and build the AI that puts those answers in their hands.</p>
-      <p class="intro">Bentonville, Arkansas · 13+ years in data, analytics &amp; AI · Leading a team of 8+ at Walmart Customer Engagement Services</p>
-      <div class="cta">
-        <a class="btn primary" href="#work">See my work</a>
-        <a class="btn light" href="Agnivesh_Das_Resume.pdf" download>Download résumé</a>
-        <a class="btn light" href="Agnivesh_Das.vcf" download>Save contact</a>
-        <a class="btn light" href="https://www.linkedin.com/in/agnivesh-das/" target="_blank" rel="noopener">LinkedIn</a>
+<div class="page">
+  <!-- Profile card -->
+  <header class="profile" id="top">
+    <div class="banner">
+      <svg viewBox="0 0 1100 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="rgba(240,163,108,.55)" stroke-width="1.2"><path d="M40 100 H250"/><path d="M330 100 H430"/><path d="M520 100 H600"/><path d="M700 100 H780"/><path d="M880 100 C 920 100, 930 70, 960 70 M880 100 C 920 100, 930 130, 960 130"/></g>
+        <g fill="rgba(255,255,255,.55)"><circle cx="255" cy="70" r="2.6"/><circle cx="268" cy="70" r="1.6"/><circle cx="281" cy="70" r="1.6"/><circle cx="294" cy="70" r="1.6"/><circle cx="307" cy="70" r="1.6"/><circle cx="320" cy="70" r="2.6"/><circle cx="255" cy="82" r="1.6"/><circle cx="268" cy="82" r="1.6"/><circle cx="281" cy="82" r="1.6"/><circle cx="294" cy="82" r="1.6"/><circle cx="307" cy="82" r="2.6"/><circle cx="320" cy="82" r="1.6"/><circle cx="255" cy="94" r="1.6"/><circle cx="268" cy="94" r="1.6"/><circle cx="281" cy="94" r="1.6"/><circle cx="294" cy="94" r="2.6"/><circle cx="307" cy="94" r="1.6"/><circle cx="320" cy="94" r="1.6"/><circle cx="255" cy="106" r="1.6"/><circle cx="268" cy="106" r="1.6"/><circle cx="281" cy="106" r="2.6"/><circle cx="294" cy="106" r="1.6"/><circle cx="307" cy="106" r="1.6"/><circle cx="320" cy="106" r="1.6"/><circle cx="255" cy="118" r="1.6"/><circle cx="268" cy="118" r="2.6"/><circle cx="281" cy="118" r="1.6"/><circle cx="294" cy="118" r="1.6"/><circle cx="307" cy="118" r="1.6"/><circle cx="320" cy="118" r="1.6"/><circle cx="255" cy="130" r="2.6"/><circle cx="268" cy="130" r="1.6"/><circle cx="281" cy="130" r="1.6"/><circle cx="294" cy="130" r="1.6"/><circle cx="307" cy="130" r="1.6"/><circle cx="320" cy="130" r="2.6"/></g>
+        <g fill="rgba(255,255,255,.35)"><rect x="440" y="68" width="6" height="6" rx="1.5"/><rect x="454" y="68" width="6" height="6" rx="1.5"/><rect x="468" y="68" width="6" height="6" rx="1.5"/><rect x="482" y="68" width="6" height="6" rx="1.5"/><rect x="496" y="68" width="6" height="6" rx="1.5"/><rect x="440" y="82" width="6" height="6" rx="1.5"/><rect x="454" y="82" width="6" height="6" rx="1.5"/><rect x="468" y="82" width="6" height="6" rx="1.5"/><rect x="482" y="82" width="6" height="6" rx="1.5"/><rect x="496" y="82" width="6" height="6" rx="1.5"/><rect x="440" y="96" width="6" height="6" rx="1.5"/><rect x="454" y="96" width="6" height="6" rx="1.5"/><rect x="468" y="96" width="6" height="6" rx="1.5"/><rect x="482" y="96" width="6" height="6" rx="1.5"/><rect x="496" y="96" width="6" height="6" rx="1.5"/><rect x="440" y="110" width="6" height="6" rx="1.5"/><rect x="454" y="110" width="6" height="6" rx="1.5"/><rect x="468" y="110" width="6" height="6" rx="1.5"/><rect x="482" y="110" width="6" height="6" rx="1.5"/><rect x="496" y="110" width="6" height="6" rx="1.5"/><rect x="440" y="124" width="6" height="6" rx="1.5"/><rect x="454" y="124" width="6" height="6" rx="1.5"/><rect x="468" y="124" width="6" height="6" rx="1.5"/><rect x="482" y="124" width="6" height="6" rx="1.5"/><rect x="496" y="124" width="6" height="6" rx="1.5"/></g>
+        <path d="M610 140 L630 128 L645 132 L660 112 L675 116 L690 86" stroke="#f0a36c" stroke-width="2" fill="none"/><path d="M610 140 L630 128 L645 132 L660 112 L675 116 L690 86 V140 Z" fill="rgba(240,163,108,.14)"/>
+        <rect x="790" y="66" width="80" height="68" rx="6" fill="none" stroke="rgba(255,255,255,.45)"/><rect x="800" y="80" width="26" height="44" rx="2" fill="none" stroke="rgba(255,255,255,.35)"/><rect x="834" y="80" width="28" height="18" rx="2" fill="none" stroke="#f0a36c"/>
+        <g stroke="rgba(255,255,255,.25)"><line x1="960" y1="70" x2="1000" y2="60"/><line x1="960" y1="70" x2="1000" y2="100"/><line x1="960" y1="130" x2="1000" y2="100"/><line x1="960" y1="130" x2="1000" y2="140"/><line x1="1000" y1="60" x2="1040" y2="85"/><line x1="1000" y1="100" x2="1040" y2="85"/><line x1="1000" y1="100" x2="1040" y2="120"/><line x1="1000" y1="140" x2="1040" y2="120"/></g>
+        <g fill="#f0a36c"><circle cx="960" cy="70" r="4"/><circle cx="960" cy="130" r="4"/><circle cx="1000" cy="60" r="4"/><circle cx="1000" cy="100" r="4"/><circle cx="1000" cy="140" r="4"/><circle cx="1040" cy="85" r="4"/><circle cx="1040" cy="120" r="4"/></g>
+      </svg>
+    </div>
+    <div class="pbody">
+      <div>
+        <!-- Photo: set SITE["photo"] in site_content.py; initials show until then. -->
+        <div class="avatar"><div class="mono" aria-label="Agnivesh Das">AD</div></div>
+        <h1>Agnivesh Das</h1>
+        <p class="headline">Data Analytics &amp; AI Leader. I turn fragmented enterprise data into decisions leaders trust, and build the AI that puts those answers in their hands.</p>
+        <div class="meta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>Bentonville, Arkansas</span><span>·</span><span>13+ years in data, analytics &amp; AI</span><span>·</span><span>Leading a team of 8+ at Walmart</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#work">See my work</a>
+          <a class="btn ghost" href="Agnivesh_Das_Resume.pdf" download>Download résumé</a>
+          <a class="btn ghost" href="Agnivesh_Das.vcf" download>Save contact</a>
+        </div>
+      </div>
+      <div class="orgs">
+        <div class="grp"><h4>Worked with</h4><div class="tiles"><div class="otile"><i>W</i><span>Walmart</span></div><div class="otile"><i>BP</i><span>BP</span></div><div class="otile"><i>N</i><span>Nike</span></div><div class="otile"><i>E</i><span>EmblemHealth</span></div></div></div>
+        <div class="grp"><h4>Studied at</h4><div class="tiles"><div class="otile"><i>GW</i><span>George Washington University</span></div></div></div>
       </div>
     </div>
-    <div class="photo"><div class="mono" aria-label="Agnivesh Das">AD</div></div>
-  </div>
-  <div class="wrap" style="padding-top:0">
-    <div class="worked"><small>Worked with</small><span>Walmart</span><span>BP</span><span>Nike</span><span>EmblemHealth</span><em class="edu-badge" style="font-style:normal">🎓 George Washington University</em></div>
-  </div>
-</header>
+    <nav class="tabbar" id="tabbar" role="tablist" aria-label="Sections">
+      <a href="#overview" role="tab" data-tab="overview" aria-selected="true">Overview</a>
+      <a href="#experience" role="tab" data-tab="experience" aria-selected="false">Experience</a>
+      <a href="#work" role="tab" data-tab="work" aria-selected="false">Work samples</a>
+      <a href="#education" role="tab" data-tab="education" aria-selected="false">Education</a>
+    </nav>
+  </header>
 
-<!-- 2. Overview -->
-<section id="overview">
+
+
+  <main class="panels">
+    <div data-panel="overview" id="overview" role="tabpanel">
+<section class="block" id="about">
   <div class="wrap about">
     <div>
       <p class="kicker">Overview</p>
@@ -285,9 +364,7 @@
     <div><p><b>Data Analytics & AI Leader</b> with <b>13+ years</b> across <b>Walmart, BP and Nike</b>, currently leading a <b>team of 8+ across Operations, Workforce Management, CRM and Self-Serve AI</b> for Walmart Customer Engagement Services. Builds the foundations that make enterprise data trustworthy (governed metric repositories, measurement frameworks, data pipelines) and the AI agents that put answers in leaders' hands the moment they need them. Expertise spans conversational AI, customer analytics and lifetime value, fuel and fleet operations, and data engineering, consistently turning analytics from a rear-view mirror into a steering wheel. Just as comfortable shaping the data strategy as building the first working version of it.</p></div>
   </div>
 </section>
-
-<!-- 3. What I bring -->
-<section class="soft" id="skills">
+<section class="block" id="skills">
   <div class="wrap">
     <p class="kicker">What I bring</p>
     <h2>Skills &amp; tools</h2>
@@ -298,9 +375,7 @@
     </div>
   </div>
 </section>
-
-<!-- 4. Impact -->
-<section id="impact">
+<section class="block" id="impact">
   <div class="wrap">
     <p class="kicker">Impact</p>
     <h2>Impact, by the numbers</h2>
@@ -326,11 +401,7 @@
     </div>
   </div>
 </section>
-
-
-
-<!-- 5. Featured -->
-<section class="soft" id="featured">
+<section class="block" id="featured">
   <div class="wrap">
     <div class="head-row">
       <div><p class="kicker">Featured</p><h2>Featured work</h2><p class="sub">Three projects to start with.</p></div>
@@ -372,9 +443,35 @@
 </a></div>
   </div>
 </section>
-
-<!-- 6. Experience -->
-<section id="experience">
+<section class="block" id="lenses">
+  <div class="wrap">
+    <p class="kicker">Highlights by area</p>
+    <h2>Three lenses on the same job</h2>
+    <p class="sub">Leading the work, applying AI and analytics to real problems, and building the foundations underneath.</p>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-target="lens-lead">Leadership &amp; Strategy</button><button class="tab" role="tab" aria-selected="false" data-target="lens-ai">AI &amp; Customer Analytics</button><button class="tab" role="tab" aria-selected="false" data-target="lens-data">Data Foundations &amp; Engineering</button>
+    </div>
+    
+    <div class="panel active" id="lens-lead" role="tabpanel">
+      <p class="blurb">Setting the analytics agenda, building teams, and turning results into decisions leaders act on.</p>
+      <div class="lgrid"><div class="lcard"><h3>Four pillars, one agenda</h3><p>Leads a team of 8+ across Operations, Workforce Management, CRM and Self-Serve AI for Walmart Customer Engagement Services.</p></div><div class="lcard"><h3>From pilot to realized savings</h3><p>Championed Agent Assist voice and chat AI across CRM: $17M in savings and a 23% cut in average handle time, measured all the way through.</p></div><div class="lcard"><h3>Insights that reached strategy</h3><p>Appeasement work lifted utilization from 45% to 71%, and the findings helped shape Walmart+ adoption strategy.</p></div><div class="lcard"><h3>Adoption is part of the job</h3><p>At Nike, trained 30+ colleagues on new Tableau dashboards and lifted utilization 40%.</p></div></div>
+    </div>
+    
+    <div class="panel" id="lens-ai" role="tabpanel">
+      <p class="blurb">Applying AI and customer analytics to questions the business actually asks.</p>
+      <div class="lgrid"><div class="lcard"><h3>AISLE1</h3><p>An agentic AI insights product on Claude and BigQuery; VPs and senior directors query certified metrics in plain English instead of raising ad hoc requests.</p></div><div class="lcard"><h3>Measuring an AI voice assistant</h3><p>Built the measurement framework for Sierra as self-serve rose from 25% to 62%, with CSAT improving alongside.</p></div><div class="lcard"><h3>One view of the customer</h3><p>Led BP&#39;s Single Customer Identifier, linking till, loyalty and card data; fuel-to-store conversion rose 38%.</p></div><div class="lcard"><h3>What a customer is worth</h3><p>Customer Lifetime Value on top of SCI: a 4× increase in average customer spend and $8M in marketing savings.</p></div></div>
+    </div>
+    
+    <div class="panel" id="lens-data" role="tabpanel">
+      <p class="blurb">The pipelines, models and governed metrics that everything else stands on.</p>
+      <div class="lgrid"><div class="lcard"><h3>Matching data that never shared a key</h3><p>Designed SCI&#39;s deterministic and probabilistic matching: exact keys, then confidence-scored candidates within time and value tolerances.</p></div><div class="lcard"><h3>Three regions, one KPI view</h3><p>Unified fleet KPIs across ESA, ANZ and the US: report prep cut 85%, decisions 3× faster.</p></div><div class="lcard"><h3>Finding where stock goes missing</h3><p>Ranked stores by audit loss across Thorntons and ampm: priority stores found 4× faster, inventory recovery up 22%.</p></div><div class="lcard"><h3>Legacy BI, modernized</h3><p>Moved Nike&#39;s supply chain planning reporting from Cognos to Tableau on Teradata, automating ETL across billions of rows.</p></div></div>
+    </div>
+    
+  </div>
+</section>
+    </div>
+    <div data-panel="experience" id="experience" role="tabpanel">
+<section class="block" id="career">
   <div class="wrap">
     <p class="kicker">Experience</p>
     <h2>Career</h2>
@@ -446,37 +543,9 @@
     <button class="more-roles" id="rolesBtn" aria-expanded="false">Show 2 earlier employers ↓</button>
   </div>
 </section>
-
-<!-- 7. Highlights by area -->
-<section class="soft" id="lenses">
-  <div class="wrap">
-    <p class="kicker">Highlights by area</p>
-    <h2>Three lenses on the same job</h2>
-    <p class="sub">Leading the work, applying AI and analytics to real problems, and building the foundations underneath.</p>
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="true" data-target="lens-lead">Leadership &amp; Strategy</button><button class="tab" role="tab" aria-selected="false" data-target="lens-ai">AI &amp; Customer Analytics</button><button class="tab" role="tab" aria-selected="false" data-target="lens-data">Data Foundations &amp; Engineering</button>
     </div>
-    
-    <div class="panel active" id="lens-lead" role="tabpanel">
-      <p class="blurb">Setting the analytics agenda, building teams, and turning results into decisions leaders act on.</p>
-      <div class="lgrid"><div class="lcard"><h3>Four pillars, one agenda</h3><p>Leads a team of 8+ across Operations, Workforce Management, CRM and Self-Serve AI for Walmart Customer Engagement Services.</p></div><div class="lcard"><h3>From pilot to realized savings</h3><p>Championed Agent Assist voice and chat AI across CRM: $17M in savings and a 23% cut in average handle time, measured all the way through.</p></div><div class="lcard"><h3>Insights that reached strategy</h3><p>Appeasement work lifted utilization from 45% to 71%, and the findings helped shape Walmart+ adoption strategy.</p></div><div class="lcard"><h3>Adoption is part of the job</h3><p>At Nike, trained 30+ colleagues on new Tableau dashboards and lifted utilization 40%.</p></div></div>
-    </div>
-    
-    <div class="panel" id="lens-ai" role="tabpanel">
-      <p class="blurb">Applying AI and customer analytics to questions the business actually asks.</p>
-      <div class="lgrid"><div class="lcard"><h3>AISLE1</h3><p>An agentic AI insights product on Claude and BigQuery; VPs and senior directors query certified metrics in plain English instead of raising ad hoc requests.</p></div><div class="lcard"><h3>Measuring an AI voice assistant</h3><p>Built the measurement framework for Sierra as self-serve rose from 25% to 62%, with CSAT improving alongside.</p></div><div class="lcard"><h3>One view of the customer</h3><p>Led BP&#39;s Single Customer Identifier, linking till, loyalty and card data; fuel-to-store conversion rose 38%.</p></div><div class="lcard"><h3>What a customer is worth</h3><p>Customer Lifetime Value on top of SCI: a 4× increase in average customer spend and $8M in marketing savings.</p></div></div>
-    </div>
-    
-    <div class="panel" id="lens-data" role="tabpanel">
-      <p class="blurb">The pipelines, models and governed metrics that everything else stands on.</p>
-      <div class="lgrid"><div class="lcard"><h3>Matching data that never shared a key</h3><p>Designed SCI&#39;s deterministic and probabilistic matching: exact keys, then confidence-scored candidates within time and value tolerances.</p></div><div class="lcard"><h3>Three regions, one KPI view</h3><p>Unified fleet KPIs across ESA, ANZ and the US: report prep cut 85%, decisions 3× faster.</p></div><div class="lcard"><h3>Finding where stock goes missing</h3><p>Ranked stores by audit loss across Thorntons and ampm: priority stores found 4× faster, inventory recovery up 22%.</p></div><div class="lcard"><h3>Legacy BI, modernized</h3><p>Moved Nike&#39;s supply chain planning reporting from Cognos to Tableau on Teradata, automating ETL across billions of rows.</p></div></div>
-    </div>
-    
-  </div>
-</section>
-
-<!-- 8. Work -->
-<section id="work">
+    <div data-panel="work" id="work" role="tabpanel">
+<section class="block" id="work-samples">
   <div class="wrap">
     <p class="kicker">Work</p>
     <h2>Work samples</h2>
@@ -620,9 +689,9 @@
 </a></div>
   </div>
 </section>
-
-<!-- 9. Education -->
-<section class="soft" id="education">
+    </div>
+    <div data-panel="education" id="education" role="tabpanel">
+<section class="block" id="education-list">
   <div class="wrap">
     <p class="kicker">Education</p>
     <h2>Education</h2>
@@ -633,8 +702,10 @@
     </div>
   </div>
 </section>
+    </div>
+  </main>
+</div>
 
-<!-- 10. Contact -->
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Let's talk</h2>
@@ -652,6 +723,32 @@
 </footer>
 
 <script>
+  // Tabs: show one section at a time, driven by the URL hash so links, back/forward and sharing work.
+  (function () {
+    document.documentElement.classList.add('js');
+    const TABS = ['overview', 'experience', 'work', 'education'];
+    const panels = document.querySelectorAll('[data-panel]');
+    const tabs = document.querySelectorAll('[data-tab]');
+    const navLinks = document.querySelectorAll('[data-tab-link]');
+    const tabbar = document.getElementById('tabbar');
+    let first = true;
+    function route() {
+      const h = decodeURIComponent(location.hash.slice(1));
+      const el = h && document.getElementById(h);
+      let tab = TABS.includes(h) ? h : (el && el.closest('[data-panel]') ? el.closest('[data-panel]').dataset.panel : null);
+      if (!tab && el) { if (!first) el.scrollIntoView({ behavior: 'smooth' }); first = false; return; } // e.g. #contact
+      tab = tab || 'overview';
+      panels.forEach(p => p.hidden = p.dataset.panel !== tab);
+      tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === tab)));
+      navLinks.forEach(a => a.setAttribute('aria-current', String(a.dataset.tabLink === tab)));
+      if (el && !TABS.includes(h)) el.scrollIntoView();
+      else if (!first && tabbar.getBoundingClientRect().top < 60) tabbar.scrollIntoView({ block: 'start' });
+      first = false;
+    }
+    addEventListener('hashchange', route);
+    route();
+  })();
+
   const bar = document.getElementById('progress');
   addEventListener('scroll', () => { const h = document.documentElement; bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%'; }, { passive: true });
   const mb = document.getElementById('menuBtn'), mp = document.getElementById('mobilePanel');
